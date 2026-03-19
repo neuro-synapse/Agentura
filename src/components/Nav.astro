@@ -1,0 +1,158 @@
+---
+const pathname = Astro.url.pathname;
+
+const links = [
+  { href: '/tao', label: 'Principles' },
+  { href: '/services', label: 'Services' },
+  { href: '/#process', label: 'Process' },
+  { href: '/#contact', label: 'Contact' },
+];
+---
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="wordmark">Agentura</a>
+    <div class="nav-links" id="nav-links">
+      {links.map(({ href, label }) => (
+        <a
+          href={href}
+          class:list={[{ active: pathname === href || (href !== '/' && pathname.startsWith(href)) }]}
+        >
+          {label}
+        </a>
+      ))}
+      <a href="mailto:hello@agentura.dev" class="nav-cta">Talk to us</a>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle menu" id="menu-toggle">
+      <span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const links = document.getElementById('nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => {
+      const isOpen = links.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    // Close menu when clicking a link
+    links.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        links.classList.remove('open');
+        toggle.classList.remove('open');
+      });
+    });
+  }
+</script>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(250, 248, 245, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1.1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .wordmark {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-text);
+    border-bottom: none;
+    letter-spacing: -0.01em;
+  }
+  .wordmark:hover {
+    border-bottom: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    border-bottom: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--color-text);
+    border-bottom: none;
+  }
+  .nav-links a.active {
+    color: var(--color-accent);
+  }
+  .nav-cta {
+    background: var(--color-text);
+    color: var(--color-bg) !important;
+    padding: 0.55rem 1.3rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover {
+    background: var(--color-accent) !important;
+  }
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .menu-toggle span {
+    width: 20px;
+    height: 1.5px;
+    background: var(--color-text);
+    transition: transform 0.3s, opacity 0.3s;
+    display: block;
+  }
+  .menu-toggle.open span:first-child {
+    transform: rotate(45deg) translate(2.3px, 2.3px);
+  }
+  .menu-toggle.open span:last-child {
+    transform: rotate(-45deg) translate(2.3px, -2.3px);
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(250, 248, 245, 0.98);
+      backdrop-filter: blur(12px);
+      flex-direction: column;
+      padding: 1.5rem 2rem 2rem;
+      gap: 1.25rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .nav-links.open {
+      display: flex;
+    }
+    .menu-toggle {
+      display: flex;
+    }
+  }
+</style>

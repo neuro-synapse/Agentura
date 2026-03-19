@@ -1,0 +1,267 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import PrincipleCard from "../components/PrincipleCard.astro";
+import { principles, sectionLabels } from "../data/principles";
+
+const sections = ['intent', 'method', 'culture'] as const;
+---
+
+<Layout title="The Tao of Agentura — Fifteen Principles">
+
+  <Nav />
+
+  <main>
+
+    <!-- ═══ COVER ═══ -->
+    <section class="cover">
+      <div class="cover-ornament"></div>
+      <div class="cover-kicker">A Foundation Document</div>
+      <h1 class="cover-title">The Tao of <em>Agentura</em></h1>
+      <p class="cover-subtitle">
+        A foundation for how we think, what we build,<br />
+        and how we work with clients.
+      </p>
+      <div class="cover-rule"></div>
+      <div class="cover-count">Fifteen Principles</div>
+    </section>
+
+    <!-- ═══ PRINCIPLES ═══ -->
+    <div class="principles">
+      {sections.map((section, si) => (
+        <>
+          <div class="section-break" data-reveal>
+            <span class="section-break-dot"></span>
+            <span class="section-break-dot"></span>
+            <span class="section-break-dot"></span>
+            {si === 0 ? null : null}
+          </div>
+
+          <div class="section-label" data-reveal>
+            <span class="section-label-text">{sectionLabels[section]}</span>
+          </div>
+
+          {principles
+            .filter((p) => p.section === section)
+            .map((p) => (
+              <div data-reveal>
+                <PrincipleCard
+                  number={p.number}
+                  title={p.title}
+                  body={p.body}
+                  variant="full"
+                />
+              </div>
+            ))}
+        </>
+      ))}
+    </div>
+
+    <!-- ═══ COLOPHON ═══ -->
+    <section class="colophon" data-reveal>
+      <div class="colophon-rule"></div>
+      <p class="colophon-text">
+        These principles are living convictions, not fixed rules.<br />
+        They evolve as our understanding deepens —<br />
+        which, if we are doing our work well,<br />
+        it always will.
+      </p>
+      <div class="colophon-sig">Agentura &middot; March 2026</div>
+    </section>
+
+  </main>
+
+  <Footer />
+
+</Layout>
+
+<style>
+  /* ═══ COVER ═══ */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(139,69,19,0.03) 0%, transparent 70%),
+      radial-gradient(ellipse at 80% 50%, rgba(139,69,19,0.02) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cover-ornament {
+    width: 60px;
+    height: 1px;
+    background: var(--color-accent);
+    margin: 0 auto 3rem;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.3s forwards;
+  }
+  .cover-ornament::before,
+  .cover-ornament::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border: 1px solid var(--color-accent);
+    border-radius: 50%;
+    top: -3px;
+  }
+  .cover-ornament::before { left: -10px; }
+  .cover-ornament::after { right: -10px; }
+  .cover-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.6s forwards;
+  }
+  .cover-title {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3em;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.8s forwards;
+  }
+  .cover-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-accent);
+  }
+  .cover-subtitle {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--color-text-muted);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 1.2s forwards;
+  }
+  .cover-rule {
+    width: 40px;
+    height: 1px;
+    background: var(--color-border);
+    margin: 3rem auto 0;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.5s forwards;
+  }
+  .cover-count {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-top: 1rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.7s forwards;
+  }
+
+  /* ═══ PRINCIPLES ═══ */
+  .principles {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ═══ SECTION BREAKS ═══ */
+  .section-break {
+    text-align: center;
+    padding: 4rem 0 1rem;
+  }
+  .section-break-dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-accent-light);
+    margin: 0 8px;
+  }
+  .section-label {
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+  .section-label-text {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent-light);
+    padding: 0.25rem 1rem;
+    border-radius: 2px;
+  }
+
+  /* ═══ COLOPHON ═══ */
+  .colophon {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 6rem 2rem 8rem;
+    text-align: center;
+  }
+  .colophon-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--color-accent);
+    margin: 0 auto 2.5rem;
+    position: relative;
+  }
+  .colophon-rule::before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border: 1px solid var(--color-accent);
+    border-radius: 50%;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-bg);
+  }
+  .colophon-text {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    max-width: 420px;
+    margin: 0 auto 2rem;
+  }
+  .colophon-sig {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .principles { padding: 0 1.25rem; }
+  }
+</style>

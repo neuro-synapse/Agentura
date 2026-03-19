@@ -1,0 +1,174 @@
+---
+import type { Service } from '../data/services';
+import DetailGrid from './DetailGrid.astro';
+import TaoRef from './TaoRef.astro';
+
+interface Props {
+  service: Service;
+}
+const { service } = Astro.props;
+---
+
+<article class="service" data-reveal id={`s${service.number}`}>
+  <div class="s-number">Service {service.number}</div>
+  <h2 class="s-name" set:html={service.name} />
+  <p class="s-tagline">{service.tagline}</p>
+
+  <div class="s-block">
+    <div class="s-label">The situation</div>
+    <p class="s-body">{service.situation}</p>
+  </div>
+
+  <div class="s-block">
+    <div class="s-label">What we do</div>
+    {service.whatWeDo.map((p) => (
+      <p class="s-body">{p}</p>
+    ))}
+  </div>
+
+  <div class="s-block">
+    <div class="s-label">What you receive</div>
+    <ul class="del-list">
+      {service.deliverables.map(({ marker, text }) => (
+        <li>
+          <span class="del-marker">{marker}</span>
+          <span>{text}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  {service.details.length > 0 && (
+    <div class="s-block">
+      <DetailGrid items={service.details} />
+    </div>
+  )}
+
+  {service.taoRef && (
+    <TaoRef quote={service.taoRef.quote} principle={service.taoRef.principle} />
+  )}
+
+  {service.connector && (
+    <div class="s-connector">
+      <div class="conn-label">What this unlocks</div>
+      <p class="conn-text">{service.connector}</p>
+    </div>
+  )}
+</article>
+
+<style>
+  .service {
+    padding: 4.5rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .service:last-child {
+    border-bottom: none;
+  }
+  .s-number {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.7rem;
+  }
+  .s-name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+  }
+  .s-tagline {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+  .s-block {
+    margin-bottom: 2.2rem;
+  }
+  .s-label {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-accent-light);
+    margin-bottom: 0.7rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--color-border-light);
+    display: inline-block;
+  }
+  .s-body {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+  }
+  .s-body + .s-body {
+    margin-top: 0.9rem;
+  }
+  .del-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.3rem;
+  }
+  .del-list li {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+  }
+  .del-list li:last-child {
+    border-bottom: none;
+  }
+  .del-marker {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    min-width: 56px;
+  }
+  .s-connector {
+    margin-top: 2.2rem;
+    padding: 1.2rem 0 0;
+    border-top: 1px solid var(--color-border-light);
+  }
+  .conn-label {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    margin-bottom: 0.3rem;
+  }
+  .conn-text {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    max-width: 460px;
+  }
+  @media (max-width: 600px) {
+    .service {
+      padding: 3rem 0;
+    }
+  }
+</style>

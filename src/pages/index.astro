@@ -1,25 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import PrincipleCard from "../components/PrincipleCard.astro";
+import CTA from "../components/CTA.astro";
+import { homepagePrinciples } from "../data/principles";
+import { tracks } from "../data/services";
 ---
 
 <Layout title="Agentura — Dependable AI for real work">
 
-  <!-- ═══ NAV ═══ -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="/" class="wordmark">Agentura</a>
-      <div class="nav-links">
-        <a href="#problems">Problems</a>
-        <a href="#deliverables">Deliverables</a>
-        <a href="#process">Process</a>
-        <a href="#principles">Principles</a>
-        <a href="#contact" class="nav-cta">Talk to us</a>
-      </div>
-      <button class="menu-toggle" aria-label="Menu">
-        <span></span><span></span>
-      </button>
-    </div>
-  </nav>
+  <Nav />
 
   <main>
 
@@ -28,13 +20,13 @@ import Layout from "../layouts/Layout.astro";
       <div class="hero-inner">
         <div class="hero-label">
           <span class="label-dot"></span>
-          <span class="label-text">AI implementation for operations teams</span>
+          <span class="label-text">Agentic systems that compound in value</span>
         </div>
-        <h1>We turn AI from demos<br/>into dependable tools<br/>that do <em>real work</em>.</h1>
+        <h1>We design, build, and<br/>operationalize agentic<br/>systems that do <em>real work</em>.</h1>
         <div class="hero-sub">
           <p>Most teams have seen impressive AI prototypes. A bot that drafts emails. An "agent" that clicks around a browser. A script that summarizes documents.</p>
           <p>These demos rarely make it into day-to-day operations. They break on edge cases, can't be trusted with real data, and need constant babysitting.</p>
-          <p class="hero-bold">Our job is to close that gap.</p>
+          <p class="hero-bold">Our job is to close that gap — and build systems that compound in value over time.</p>
         </div>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary">Start a conversation</a>
@@ -54,437 +46,169 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </section>
 
-    <!-- ═══ WHAT WE DO (compact) ═══ -->
+    <!-- ═══ WHAT WE DO ═══ -->
     <section class="what-we-do">
       <div class="container">
         <div class="capability-grid">
           <div class="capability">
             <span class="cap-num">01</span>
-            <p>Identify high-value workflows where AI can remove large amounts of manual work</p>
+            <p>Surface tacit knowledge and clarify intent before designing anything</p>
           </div>
           <div class="capability">
             <span class="cap-num">02</span>
-            <p>Design, build, and deploy systems that plug into your existing tools</p>
+            <p>Design the harness — tools, guardrails, and evaluation — not just the model</p>
           </div>
           <div class="capability">
             <span class="cap-num">03</span>
-            <p>Set clear guardrails so the system is useful but predictable and reviewable</p>
+            <p>Build agents that own the connective tissue between your existing systems</p>
           </div>
           <div class="capability">
             <span class="cap-num">04</span>
-            <p>Leave you with something you own: documented, observable, maintainable</p>
+            <p>Leave you with something you own: documented, observable, and compounding</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ PROBLEMS ═══ -->
-    <section id="problems" class="section section-dark">
+    <!-- ═══ THREE TRACKS ═══ -->
+    <section id="tracks" class="section section-dark" data-reveal>
       <div class="container">
-        <div class="section-header">
-          <span class="section-num">I</span>
-          <h2>Problems<br/>we focus on</h2>
-        </div>
-        <div class="two-col">
-          <div class="col-left">
-            <p class="lead">We focus on repetitive, information-heavy work where smart people currently spend time doing things that don't require their full intelligence.</p>
-            <div class="focus-list">
-              <div class="focus-item">
-                <span class="focus-icon">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7h16" stroke="currentColor" stroke-width="1.5"/><path d="M6 11h4M6 14h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                </span>
-                Reading lots of text — emails, tickets, contracts, reports
-              </div>
-              <div class="focus-item">
-                <span class="focus-icon">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                </span>
-                Making routine decisions based on clear rules and context
-              </div>
-              <div class="focus-item">
-                <span class="focus-icon">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 10h3l2-5 3 10 2-5h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </span>
-                Updating systems of record — CRM, helpdesk, project tools
-              </div>
-              <div class="focus-item">
-                <span class="focus-icon">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="2" width="14" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 6h6M7 10h6M7 14h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                </span>
-                Preparing for meetings — context, summaries, follow-ups
-              </div>
-            </div>
-          </div>
-          <div class="col-right">
-            <h3 class="col-heading">Typical clients</h3>
-            <div class="client-list">
-              <div class="client-item">
-                <span class="client-label">Support & Success</span>
-                <span class="client-desc">Large volumes of similar questions</span>
-              </div>
-              <div class="client-item">
-                <span class="client-label">Sales</span>
-                <span class="client-desc">Lead follow-up, CRM updates, call prep</span>
-              </div>
-              <div class="client-item">
-                <span class="client-label">Operations</span>
-                <span class="client-desc">Data reconciliation, weekly reporting</span>
-              </div>
-              <div class="client-item">
-                <span class="client-label">Legal & Compliance</span>
-                <span class="client-desc">First-pass review and triage of documents</span>
-              </div>
-            </div>
+        <SectionHeader num="I" dark>What we<br/>do</SectionHeader>
+        <p class="section-intro">Three tracks of services — each designed for a different stage and scale of agentic ambition.</p>
 
-            <div class="criteria-box">
-              <h4>We look for work that:</h4>
-              <ul>
-                <li>Happens every day</li>
-                <li>Has clear definitions of "good" and "bad"</li>
-                <li>Is painful enough that automation would be felt quickly</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ DELIVERABLES ═══ -->
-    <section id="deliverables" class="section">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-num">II</span>
-          <h2>What we<br/>deliver</h2>
-        </div>
-
-        <div class="deliverables-grid">
-          <div class="deliverable">
-            <div class="del-header">
-              <span class="del-num">A</span>
-              <h3>An AI-powered workflow inside your existing tools</h3>
-            </div>
-            <div class="del-examples">
-              <div class="example">
-                <span class="example-arrow">&rarr;</span>
-                <p>A support assistant that reads new tickets, drafts a reply, suggests actions, and updates fields in your helpdesk — always with human final approval.</p>
-              </div>
-              <div class="example">
-                <span class="example-arrow">&rarr;</span>
-                <p>A meeting prep workflow that reads your calendar, pulls 90 days of emails and documents about that account, and prepares a one-page brief and draft agenda.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="deliverable">
-            <div class="del-header">
-              <span class="del-num">B</span>
-              <h3>A "virtual teammate" available via email or Slack</h3>
-            </div>
-            <div class="del-examples">
-              <div class="example">
-                <span class="example-arrow">&rarr;</span>
-                <p>An internal research assistant you can DM: <span class="inline-quote">"Summarize everything we know about Client X from the last year and highlight open risks."</span></p>
-              </div>
-              <div class="example">
-                <span class="example-arrow">&rarr;</span>
-                <p>A follow-up assistant that watches a channel or inbox, drafts replies, and nudges humans when something important is stuck.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="deliverable">
-            <div class="del-header">
-              <span class="del-num">C</span>
-              <h3>A playbook and infrastructure for doing this repeatedly</h3>
-            </div>
-            <div class="del-examples">
-              <div class="example">
-                <span class="example-arrow">&rarr;</span>
-                <p>Set up a small "AI pod" (1–3 people + tools) inside your org with standards for prompts, evaluation, logging, and approvals.</p>
-              </div>
-              <div class="example">
-                <span class="example-arrow">&rarr;</span>
-                <p>Create templates so new AI workflows can be designed and deployed faster and more safely.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="always-box">
-          <h4>In all cases, we deliver:</h4>
-          <div class="always-grid">
-            <div class="always-item">
-              <span class="always-check">&check;</span>
-              Working software wired into your environment
-            </div>
-            <div class="always-item">
-              <span class="always-check">&check;</span>
-              Documentation your engineers can read
-            </div>
-            <div class="always-item">
-              <span class="always-check">&check;</span>
-              Monitoring and logs — what it did and why
-            </div>
-            <div class="always-item">
-              <span class="always-check">&check;</span>
-              Clear ownership: who maintains it, how changes are made
-            </div>
-          </div>
+        <div class="tracks-grid">
+          <a href="/services#t1" class="track-card" data-reveal>
+            <span class="track-label">{tracks.I.label}</span>
+            <h3>{tracks.I.title}</h3>
+            <p>{tracks.I.description}</p>
+            <span class="track-services">Intent Mapping · Tool Architecture · Platform Design · Ambient Agents · Observability</span>
+            <span class="track-link">View services &rarr;</span>
+          </a>
+          <a href="/services#t2" class="track-card" data-reveal>
+            <span class="track-label">{tracks.II.label}</span>
+            <h3>{tracks.II.title}</h3>
+            <p>{tracks.II.description}</p>
+            <span class="track-services">Agent Experience Design</span>
+            <span class="track-link">View services &rarr;</span>
+          </a>
+          <a href="/services#t3" class="track-card" data-reveal>
+            <span class="track-label">{tracks.III.label}</span>
+            <h3>{tracks.III.title}</h3>
+            <p>{tracks.III.description}</p>
+            <span class="track-services">Operations Copilot · Workflow Packages · Knowledge Capture</span>
+            <span class="track-link">View services &rarr;</span>
+          </a>
         </div>
       </div>
     </section>
 
     <!-- ═══ PROCESS ═══ -->
-    <section id="process" class="section section-dark">
+    <section id="process" class="section" data-reveal>
       <div class="container">
-        <div class="section-header">
-          <span class="section-num">III</span>
-          <h2>How we<br/>work</h2>
-        </div>
-        <p class="section-intro">A simple, repeatable process. No mystery, no magic.</p>
+        <SectionHeader num="II">How we<br/>work</SectionHeader>
+        <p class="section-intro-light">Start from intent. Specify before you automate. Make reasoning visible.</p>
 
         <div class="process-timeline">
-          <div class="process-step">
+          <div class="process-step" data-reveal>
             <div class="step-marker">
               <span class="step-number">1</span>
               <span class="step-line"></span>
             </div>
             <div class="step-content">
-              <h3>Understand the work, not the hype</h3>
-              <p>We sit with the people who actually do the work today: support reps, salespeople, analysts, operations staff. We watch how it's done in your real tools. We avoid designing from slide decks.</p>
-              <div class="step-outcome">
-                <span class="outcome-label">Outcome</span>
-                A short list of 2–3 candidate workflows, described in plain language with current pain, volume, and risk.
-              </div>
+              <h3>Clarify intent, not features</h3>
+              <p>We sit with the people who actually do the work. We watch how it's done in your real tools. We identify what outcome must change in the real world.</p>
             </div>
           </div>
-
-          <div class="process-step">
+          <div class="process-step" data-reveal>
             <div class="step-marker">
               <span class="step-number">2</span>
               <span class="step-line"></span>
             </div>
             <div class="step-content">
-              <h3>Choose one narrow, valuable workflow</h3>
-              <p>Small enough to ship in a few weeks. Important enough that success is obvious. We avoid "automate everything for our whole department" and vague goals like "make us more AI-powered."</p>
-              <div class="step-outcome">
-                <span class="outcome-label">Outcome</span>
-                One well-defined workflow with clear success criteria: time saved, response quality, or reduction in manual data entry.
-              </div>
+              <h3>Extract knowledge, specify decisions</h3>
+              <p>We surface the tacit knowledge that lives in people's heads. Decision heuristics become Given-When-Then scenarios. Tribal knowledge becomes versioned, searchable intelligence.</p>
             </div>
           </div>
-
-          <div class="process-step">
+          <div class="process-step" data-reveal>
             <div class="step-marker">
               <span class="step-number">3</span>
               <span class="step-line"></span>
             </div>
             <div class="step-content">
-              <h3>Design the guardrails</h3>
-              <p>Before we write code, we design the safety boundaries. What the system can do on its own. What needs human approval. What data it can see. What must be logged. We assume AI can be wrong and design accordingly.</p>
-              <div class="step-outcome">
-                <span class="outcome-label">Outcome</span>
-                A short "contract" for the system: scope, allowed actions, and required checks.
-              </div>
+              <h3>Design the harness, not just the model</h3>
+              <p>Tools shaped around intention, not API structure. Guardrails articulated before code. Context architecture designed for progressive disclosure.</p>
             </div>
           </div>
-
-          <div class="process-step">
+          <div class="process-step" data-reveal>
             <div class="step-marker">
               <span class="step-number">4</span>
               <span class="step-line"></span>
             </div>
             <div class="step-content">
-              <h3>Build the first version in your environment</h3>
-              <p>Connect to your tools via APIs and webhooks. Implement end-to-end including prompts, tools, and logging. Deploy with a small pilot group. We favor simple surfaces — email over dashboards, Slack over custom UI.</p>
-              <div class="step-outcome">
-                <span class="outcome-label">Outcome</span>
-                A functioning workflow your team can use on real, initially low-risk work.
-              </div>
+              <h3>Build fast, deploy narrow</h3>
+              <p>Connect to your tools via APIs and webhooks. Deploy with a small pilot group on low-risk work. We favor simple surfaces — email over dashboards, Slack over custom UI.</p>
             </div>
           </div>
-
-          <div class="process-step">
+          <div class="process-step" data-reveal>
             <div class="step-marker">
               <span class="step-number">5</span>
               <span class="step-line"></span>
             </div>
             <div class="step-content">
-              <h3>Test on real work, measure, and adjust</h3>
-              <p>Run the system alongside humans for a few weeks. Compare AI suggestions to human decisions. Track errors and edge cases. Measure time saved. Iterate until the system is reliable and predictable.</p>
-              <div class="step-outcome">
-                <span class="outcome-label">Outcome</span>
-                A hardened workflow that your team trusts for a clearly defined slice of work.
-              </div>
+              <h3>Observe, evaluate, compound</h3>
+              <p>Every agent encounter with reality teaches the harness something. We implement the compound engineering loop — every mistake becomes a permanent improvement.</p>
             </div>
           </div>
-
-          <div class="process-step">
+          <div class="process-step" data-reveal>
             <div class="step-marker">
               <span class="step-number">6</span>
             </div>
             <div class="step-content">
-              <h3>Hand off and (optionally) expand</h3>
-              <p>Document the system: architecture, prompts, failure modes, operating procedures. Train your team. Agree on a support model. If you want to go further, we repeat the cycle — now faster because the basics are in place.</p>
-              <div class="step-outcome">
-                <span class="outcome-label">Outcome</span>
-                A system your team owns, understands, and can extend independently.
-              </div>
+              <h3>Hand off and expand</h3>
+              <p>Document the system. Train your team. If you want to go further, we repeat the cycle — now faster because the agentic layer is in place and compounding.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ PRINCIPLES ═══ -->
-    <section id="principles" class="section">
+    <!-- ═══ PRINCIPLES TEASER ═══ -->
+    <section id="principles" class="section section-warm" data-reveal>
       <div class="container">
-        <div class="section-header">
-          <span class="section-num">IV</span>
-          <h2>How we're<br/>different</h2>
-        </div>
+        <SectionHeader num="III">What we<br/>believe</SectionHeader>
 
         <div class="principles-grid">
-          <div class="principle">
-            <div class="principle-header">
-              <span class="principle-num">01</span>
-              <h3>Plain language over jargon</h3>
+          {homepagePrinciples.map((p) => (
+            <div data-reveal>
+              <PrincipleCard number={p.number} title={p.title} body={p.body} />
             </div>
-            <p>We describe what the system does in simple terms: "reads tickets, drafts replies, suggests actions." How it works internally is our problem, not yours.</p>
-          </div>
+          ))}
+        </div>
 
-          <div class="principle">
-            <div class="principle-header">
-              <span class="principle-num">02</span>
-              <h3>Production over prototypes</h3>
-            </div>
-            <p>We care less about clever demos and more about what runs every day without drama. If it can't survive bad data, weird edge cases, and real users, we don't consider it done.</p>
-          </div>
-
-          <div class="principle">
-            <div class="principle-header">
-              <span class="principle-num">03</span>
-              <h3>Guardrails first, then autonomy</h3>
-            </div>
-            <p>We start with humans firmly in control. Only once we see stable behavior and clear logs do we discuss granting more autonomy.</p>
-          </div>
-
-          <div class="principle">
-            <div class="principle-header">
-              <span class="principle-num">04</span>
-              <h3>Knowledge transfer, not dependency</h3>
-            </div>
-            <p>We aim to make ourselves less necessary over time. Code, docs, and patterns your team can extend — not a black box only we can touch.</p>
-          </div>
-
-          <div class="principle">
-            <div class="principle-header">
-              <span class="principle-num">05</span>
-              <h3>Honesty about fit</h3>
-            </div>
-            <p>Some problems are not good candidates — stakes too high, rules too fuzzy, or volume too low. We will say so upfront rather than sell you something that won't work.</p>
-          </div>
+        <div class="principles-more" data-reveal>
+          <a href="/tao" class="btn btn-ghost">Read all fifteen principles &rarr;</a>
         </div>
       </div>
     </section>
 
     <!-- ═══ CTA ═══ -->
-    <section id="contact" class="section section-cta">
-      <div class="container">
-        <div class="cta-inner">
-          <h2>Let's find the right workflow.</h2>
-          <p>We start every engagement with a short conversation — no pitch, no pressure. We'll ask about your team's daily work and tell you honestly whether we can help.</p>
-          <a href="mailto:hello@agentura.dev" class="btn btn-primary btn-large">hello@agentura.dev</a>
-        </div>
-      </div>
-    </section>
+    <CTA />
 
   </main>
 
-  <!-- ═══ FOOTER ═══ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <span class="footer-mark">Agentura</span>
-        <span class="footer-copy">&copy; 2026</span>
-      </div>
-    </div>
-  </footer>
+  <Footer />
 
 </Layout>
 
 <style>
   /* ══════════════════════════════════════
-     NAV
-     ══════════════════════════════════════ */
-  .nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-    background: rgba(245, 242, 236, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--color-border);
-  }
-  .nav-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 1.1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .wordmark {
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    color: var(--color-text);
-    border-bottom: none;
-    letter-spacing: -0.01em;
-  }
-  .wordmark:hover { border-bottom: none; }
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    align-items: center;
-  }
-  .nav-links a {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-text-secondary);
-    border-bottom: none;
-  }
-  .nav-links a:hover {
-    color: var(--color-text);
-    border-bottom: none;
-  }
-  .nav-cta {
-    background: var(--color-text);
-    color: var(--color-bg) !important;
-    padding: 0.55rem 1.3rem;
-    border-radius: 4px;
-    transition: background 0.2s;
-  }
-  .nav-cta:hover {
-    background: var(--color-accent) !important;
-  }
-  .menu-toggle { display: none; }
-
-  /* ══════════════════════════════════════
-     CONTAINER
+     CONTAINER & BUTTONS
      ══════════════════════════════════════ */
   .container {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 2rem;
   }
-
-  /* ══════════════════════════════════════
-     BUTTONS
-     ══════════════════════════════════════ */
   .btn {
     display: inline-block;
     font-family: var(--font-mono);
@@ -513,10 +237,6 @@ import Layout from "../layouts/Layout.astro";
   .btn-ghost:hover {
     box-shadow: inset 0 0 0 1.5px var(--color-accent);
     color: var(--color-accent);
-  }
-  .btn-large {
-    font-size: 1rem;
-    padding: 1rem 2.5rem;
   }
 
   /* ══════════════════════════════════════
@@ -557,7 +277,7 @@ import Layout from "../layouts/Layout.astro";
     color: var(--color-text-secondary);
   }
   .hero h1 {
-    font-family: var(--font-display);
+    font-family: var(--font-serif);
     font-size: clamp(2.8rem, 5vw, 4rem);
     font-weight: 400;
     line-height: 1.15;
@@ -580,7 +300,7 @@ import Layout from "../layouts/Layout.astro";
   }
   .hero-bold {
     color: var(--color-text) !important;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.1rem !important;
   }
   .hero-actions {
@@ -589,7 +309,7 @@ import Layout from "../layouts/Layout.astro";
     flex-wrap: wrap;
   }
 
-  /* Hero aside card */
+  /* Aside card */
   .aside-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -610,10 +330,10 @@ import Layout from "../layouts/Layout.astro";
     color: var(--color-text-muted);
   }
   .aside-strike {
-    font-family: var(--font-display);
+    font-family: var(--font-serif);
     font-size: 1.25rem;
     text-decoration: line-through;
-    text-decoration-color: var(--color-red);
+    text-decoration-color: #C1403D;
     text-decoration-thickness: 2px;
     color: var(--color-text-muted);
   }
@@ -630,7 +350,7 @@ import Layout from "../layouts/Layout.astro";
   }
 
   /* ══════════════════════════════════════
-     WHAT WE DO (capabilities strip)
+     WHAT WE DO
      ══════════════════════════════════════ */
   .what-we-do {
     border-top: 1px solid var(--color-border);
@@ -664,7 +384,7 @@ import Layout from "../layouts/Layout.astro";
   }
 
   /* ══════════════════════════════════════
-     SECTIONS (shared)
+     SECTIONS
      ══════════════════════════════════════ */
   .section {
     padding: var(--space-xl) 0;
@@ -673,30 +393,8 @@ import Layout from "../layouts/Layout.astro";
     background: var(--color-text);
     color: var(--color-bg);
   }
-  .section-dark .section-num { color: var(--color-highlight); }
-  .section-dark a { color: var(--color-highlight); }
-
-  .section-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-    margin-bottom: 3.5rem;
-  }
-  .section-num {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: var(--color-accent);
-    padding-top: 0.75rem;
-    flex-shrink: 0;
-  }
-  .section-header h2 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+  .section-warm {
+    background: var(--color-bg-warm);
   }
   .section-intro {
     font-size: 1.1rem;
@@ -705,206 +403,77 @@ import Layout from "../layouts/Layout.astro";
     margin-bottom: 3.5rem;
     max-width: 500px;
   }
+  .section-intro-light {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+    margin-top: -2rem;
+    margin-bottom: 3.5rem;
+    max-width: 500px;
+  }
 
   /* ══════════════════════════════════════
-     PROBLEMS
+     TRACKS GRID
      ══════════════════════════════════════ */
-  .two-col {
+  .tracks-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
   }
-  .lead {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: rgba(245,242,236,0.75);
-    margin-bottom: 2.5rem;
-  }
-  .focus-list {
+  .track-card {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
-  }
-  .focus-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    font-size: 0.95rem;
-    line-height: 1.55;
-    color: rgba(245,242,236,0.85);
-  }
-  .focus-icon {
-    flex-shrink: 0;
-    color: var(--color-highlight);
-    margin-top: 2px;
-  }
-  .col-heading {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-highlight);
-    margin-bottom: 1.5rem;
-  }
-  .client-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-  }
-  .client-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(245,242,236,0.1);
-  }
-  .client-label {
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: rgba(245,242,236,0.95);
-  }
-  .client-desc {
-    font-size: 0.85rem;
-    color: rgba(245,242,236,0.5);
-  }
-  .criteria-box {
     background: rgba(245,242,236,0.06);
-    border: 1px solid rgba(245,242,236,0.1);
+    border: 1px solid rgba(245,242,236,0.12);
     border-radius: 6px;
-    padding: 1.5rem;
+    padding: 2rem;
+    color: rgba(245,242,236,0.9);
+    border-bottom: 1px solid rgba(245,242,236,0.12);
+    transition: border-color 0.2s, background 0.2s;
   }
-  .criteria-box h4 {
+  .track-card:hover {
+    border-color: var(--color-highlight);
+    background: rgba(245,242,236,0.08);
+    border-bottom-color: var(--color-highlight);
+  }
+  .track-label {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: rgba(245,242,236,0.5);
+    color: var(--color-highlight);
     margin-bottom: 1rem;
   }
-  .criteria-box ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-  .criteria-box li {
-    font-size: 0.9rem;
-    color: rgba(245,242,236,0.85);
-    padding-left: 1.2rem;
-    position: relative;
-  }
-  .criteria-box li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--color-highlight);
-  }
-
-  /* ══════════════════════════════════════
-     DELIVERABLES
-     ══════════════════════════════════════ */
-  .deliverables-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
-  .deliverable {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    padding: 2.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-  }
-  .del-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.25rem;
-    margin-bottom: 1.5rem;
-  }
-  .del-num {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--color-accent);
-    background: rgba(13,107,110,0.08);
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .del-header h3 {
-    font-family: var(--font-display);
+  .track-card h3 {
+    font-family: var(--font-serif);
     font-size: 1.35rem;
     font-weight: 400;
-    line-height: 1.35;
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
   }
-  .del-examples {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding-left: 3.5rem;
+  .track-card p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: rgba(245,242,236,0.55);
+    flex: 1;
+    margin-bottom: 1.25rem;
   }
-  .example {
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
-  }
-  .example-arrow {
-    color: var(--color-accent);
-    font-size: 1rem;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .example p {
-    font-size: 0.92rem;
-    color: var(--color-text-secondary);
+  .track-services {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.02em;
+    color: rgba(245,242,236,0.35);
+    margin-bottom: 1.25rem;
     line-height: 1.6;
   }
-  .inline-quote {
-    font-style: italic;
-    color: var(--color-text);
-    background: rgba(13,107,110,0.06);
-    padding: 0.1em 0.4em;
-    border-radius: 3px;
-  }
-
-  .always-box {
-    border-top: 2px solid var(--color-text);
-    padding-top: 2rem;
-  }
-  .always-box h4 {
+  .track-link {
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    margin-bottom: 1.5rem;
-  }
-  .always-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  .always-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    font-size: 0.92rem;
-    color: var(--color-text-secondary);
-  }
-  .always-check {
-    color: var(--color-accent);
-    font-weight: 600;
-    flex-shrink: 0;
+    font-weight: 500;
+    color: var(--color-highlight);
+    letter-spacing: 0.03em;
   }
 
   /* ══════════════════════════════════════
@@ -919,7 +488,7 @@ import Layout from "../layouts/Layout.astro";
     display: grid;
     grid-template-columns: 60px 1fr;
     gap: 2rem;
-    min-height: 200px;
+    min-height: 140px;
   }
   .step-marker {
     display: flex;
@@ -935,149 +504,58 @@ import Layout from "../layouts/Layout.astro";
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1.5px solid var(--color-highlight);
+    border: 1.5px solid var(--color-accent);
     border-radius: 50%;
-    color: var(--color-highlight);
+    color: var(--color-accent);
     flex-shrink: 0;
   }
   .step-line {
     width: 1px;
     flex: 1;
-    background: rgba(245,242,236,0.15);
+    background: var(--color-border);
     margin: 0.75rem 0;
   }
   .step-content {
-    padding-bottom: 3rem;
+    padding-bottom: 2.5rem;
   }
   .step-content h3 {
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    font-weight: 400;
-    margin-bottom: 1rem;
-    color: rgba(245,242,236,0.95);
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
   }
   .step-content > p {
     font-size: 0.95rem;
     line-height: 1.7;
-    color: rgba(245,242,236,0.6);
+    color: var(--color-text-secondary);
     max-width: 600px;
-    margin-bottom: 1.5rem;
-  }
-  .step-outcome {
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: rgba(245,242,236,0.8);
-    padding: 1rem 1.25rem;
-    background: rgba(245,242,236,0.05);
-    border-left: 2px solid var(--color-highlight);
-    border-radius: 0 4px 4px 0;
-  }
-  .outcome-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-highlight);
-    display: block;
-    margin-bottom: 0.3rem;
   }
 
   /* ══════════════════════════════════════
-     PRINCIPLES
+     PRINCIPLES TEASER
      ══════════════════════════════════════ */
   .principles-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
+    gap: 1.5rem;
   }
-  .principle {
-    padding: 2rem;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    transition: border-color 0.2s;
-  }
-  .principle:hover {
-    border-color: var(--color-accent);
-  }
-  .principle-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  .principle-num {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: var(--color-accent);
-    letter-spacing: 0.05em;
-  }
-  .principle h3 {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 400;
-  }
-  .principle p {
-    font-size: 0.9rem;
-    line-height: 1.65;
-    color: var(--color-text-secondary);
+  .principles-more {
+    margin-top: 3rem;
+    text-align: center;
   }
 
   /* ══════════════════════════════════════
-     CTA
+     ENTRANCE ANIMATIONS
      ══════════════════════════════════════ */
-  .section-cta {
-    background: var(--color-accent);
-    color: white;
-    padding: var(--space-xl) 0;
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-inner, .hero-aside {
+      animation: fadeUp 0.6s ease-out both;
+    }
+    .hero-aside { animation-delay: 0.15s; }
   }
-  .cta-inner {
-    max-width: 600px;
-  }
-  .cta-inner h2 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 400;
-    margin-bottom: 1.25rem;
-    line-height: 1.2;
-  }
-  .cta-inner p {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: rgba(255,255,255,0.8);
-    margin-bottom: 2rem;
-  }
-  .section-cta .btn-primary {
-    background: white;
-    color: var(--color-accent);
-    font-size: 1rem;
-  }
-  .section-cta .btn-primary:hover {
-    background: var(--color-bg);
-  }
-
-  /* ══════════════════════════════════════
-     FOOTER
-     ══════════════════════════════════════ */
-  .footer {
-    border-top: 1px solid var(--color-border);
-    padding: 1.5rem 0;
-  }
-  .footer-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer-mark {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    color: var(--color-text-muted);
-  }
-  .footer-copy {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   /* ══════════════════════════════════════
@@ -1090,60 +568,16 @@ import Layout from "../layouts/Layout.astro";
       gap: 2rem;
     }
     .hero-aside { order: -1; }
-    .two-col { grid-template-columns: 1fr; gap: 3rem; }
+    .tracks-grid { grid-template-columns: 1fr; }
     .capability-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
     .capability { border-left: none; padding: 0; }
-    .always-grid { grid-template-columns: 1fr; }
-    .del-examples { padding-left: 0; }
   }
 
-  @media (max-width: 640px) {
-    .nav-links { display: none; }
-    .menu-toggle {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .menu-toggle span {
-      width: 20px;
-      height: 1.5px;
-      background: var(--color-text);
-    }
+  @media (max-width: 768px) {
     .hero { padding: 7rem 1.5rem 3rem; }
     .container { padding: 0 1.5rem; }
     .capability-grid { grid-template-columns: 1fr; }
     .process-step { grid-template-columns: 44px 1fr; gap: 1.25rem; }
     .principles-grid { grid-template-columns: 1fr; }
-  }
-
-  /* ══════════════════════════════════════
-     ENTRANCE ANIMATIONS
-     ══════════════════════════════════════ */
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-inner, .hero-aside, .deliverable, .principle, .process-step {
-      animation: fadeUp 0.6s ease-out both;
-    }
-    .hero-aside { animation-delay: 0.15s; }
-    .deliverable:nth-child(2) { animation-delay: 0.1s; }
-    .deliverable:nth-child(3) { animation-delay: 0.2s; }
-    .principle:nth-child(2) { animation-delay: 0.05s; }
-    .principle:nth-child(3) { animation-delay: 0.1s; }
-    .principle:nth-child(4) { animation-delay: 0.15s; }
-    .principle:nth-child(5) { animation-delay: 0.2s; }
-  }
-
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 </style>

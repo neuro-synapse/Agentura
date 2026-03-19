@@ -1,0 +1,122 @@
+---
+interface Props {
+  number: number;
+  title: string;
+  body: string;
+  variant?: 'compact' | 'full';
+}
+const { number, title, body, variant = 'compact' } = Astro.props;
+const numStr = String(number);
+---
+
+{variant === 'compact' ? (
+  <div class="principle-compact">
+    <div class="principle-header">
+      <span class="principle-num">{numStr.padStart(2, '0')}</span>
+      <h3>{title}</h3>
+    </div>
+    <p>{body}</p>
+  </div>
+) : (
+  <article class="principle-full">
+    <div class="principle-header-full">
+      <span class="principle-number">{number}</span>
+      <h2 class="principle-title">{title}</h2>
+    </div>
+    <p class="principle-body">{body}</p>
+  </article>
+)}
+
+<style>
+  /* Compact variant — for homepage grid */
+  .principle-compact {
+    padding: 2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    transition: border-color 0.2s;
+  }
+  .principle-compact:hover {
+    border-color: var(--color-accent);
+  }
+  .principle-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .principle-num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+  }
+  .principle-compact h3 {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  .principle-compact p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+
+  /* Full variant — for /tao page */
+  .principle-full {
+    padding: 5rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .principle-full:last-child {
+    border-bottom: none;
+  }
+  .principle-header-full {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  .principle-number {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--color-border);
+    flex-shrink: 0;
+    min-width: 2.5rem;
+    text-align: right;
+  }
+  .principle-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 1.55rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  .principle-body {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin-left: calc(2.5rem + 1.2rem);
+    max-width: 540px;
+  }
+
+  @media (max-width: 600px) {
+    .principle-full {
+      padding: 3rem 0;
+    }
+    .principle-number {
+      font-size: 2.5rem;
+      min-width: 2rem;
+    }
+    .principle-title {
+      font-size: 1.3rem;
+    }
+    .principle-body {
+      margin-left: calc(2rem + 1.2rem);
+      font-size: 0.95rem;
+    }
+  }
+</style>

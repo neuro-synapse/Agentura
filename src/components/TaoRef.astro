@@ -1,0 +1,38 @@
+---
+interface Props {
+  quote: string;
+  principle: number;
+}
+const { quote, principle } = Astro.props;
+---
+
+<div class="tao-ref">
+  <p>&ldquo;{quote}&rdquo;</p>
+  <span class="ref-src">Tao &mdash; Principle {principle}</span>
+</div>
+
+<style>
+  .tao-ref {
+    margin: 1.8rem 0;
+    padding: 1rem 1.4rem;
+    border-left: 2px solid var(--color-accent-light);
+    background: var(--color-accent-faint);
+  }
+  .tao-ref p {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+  .ref-src {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent-light);
+    margin-top: 0.4rem;
+    display: block;
+  }
+</style>

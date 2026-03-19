@@ -4,7 +4,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Agentura — We turn AI from demos into dependable tools that do real work." } = Astro.props;
+const { title, description = "Agentura — We design, build, and operationalize agentic systems that compound in value over time." } = Astro.props;
 ---
 
 <!doctype html>
@@ -16,31 +16,50 @@ const { title, description = "Agentura — We turn AI from demos into dependable
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <title>{title}</title>
   </head>
   <body>
     <slot />
+    <script>
+      // Scroll-reveal observer
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      );
+      document.querySelectorAll('[data-reveal]').forEach((el) => {
+        revealObserver.observe(el);
+      });
+    </script>
   </body>
 </html>
 
 <style is:global>
   :root {
-    --color-bg: #F5F2EC;
-    --color-bg-alt: #EBE7DF;
+    --color-bg: #FAF8F5;
+    --color-bg-warm: #F3EFE8;
+    --color-bg-cool: #EEF1F5;
     --color-surface: #FFFFFF;
-    --color-border: #D4D0C8;
+    --color-border: #D4CDC4;
+    --color-border-light: #E8E2DA;
     --color-border-strong: #1A1A1A;
     --color-text: #1A1A1A;
-    --color-text-secondary: #5A5A5A;
-    --color-text-muted: #8A8A82;
-    --color-accent: #0D6B6E;
-    --color-accent-light: #128587;
-    --color-highlight: #D4A843;
-    --color-red: #C1403D;
+    --color-text-secondary: #4A4A4A;
+    --color-text-muted: #7A7A7A;
+    --color-text-faint: #B8B8B8;
+    --color-accent: #8B4513;
+    --color-accent-light: #C4956A;
+    --color-accent-faint: rgba(139, 69, 19, 0.05);
+    --color-highlight: #C4956A;
 
-    --font-display: 'DM Serif Display', Georgia, serif;
-    --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'DM Sans', -apple-system, sans-serif;
     --font-mono: 'IBM Plex Mono', 'SF Mono', monospace;
 
     --space-xs: 0.5rem;
@@ -51,7 +70,7 @@ const { title, description = "Agentura — We turn AI from demos into dependable
     --space-2xl: 10rem;
 
     --max-width: 1200px;
-    --max-width-narrow: 720px;
+    --max-width-narrow: 740px;
   }
 
   * {
@@ -61,7 +80,7 @@ const { title, description = "Agentura — We turn AI from demos into dependable
   }
 
   html {
-    font-family: var(--font-body);
+    font-family: var(--font-sans);
     font-size: 17px;
     background: var(--color-bg);
     color: var(--color-text);
@@ -94,5 +113,16 @@ const { title, description = "Agentura — We turn AI from demos into dependable
   img {
     max-width: 100%;
     display: block;
+  }
+
+  /* Scroll-reveal */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  [data-reveal].visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>

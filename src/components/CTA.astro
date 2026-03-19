@@ -1,0 +1,74 @@
+---
+interface Props {
+  heading?: string;
+  body?: string;
+}
+const {
+  heading = "Let\u2019s find the right workflow.",
+  body = "We start every engagement with a short conversation \u2014 no pitch, no pressure. We\u2019ll ask about your team\u2019s daily work and tell you honestly whether we can help.",
+} = Astro.props;
+---
+
+<section id="contact" class="section-cta">
+  <div class="container">
+    <div class="cta-inner">
+      <h2>{heading}</h2>
+      <p>{body}</p>
+      <a href="mailto:hello@agentura.dev" class="btn btn-primary btn-large">hello@agentura.dev</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-cta {
+    background: var(--color-accent);
+    color: white;
+    padding: var(--space-xl) 0;
+  }
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .cta-inner {
+    max-width: 600px;
+  }
+  .cta-inner h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+  }
+  .cta-inner p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+  }
+  .btn {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    border-bottom: none;
+    transition: all 0.2s;
+  }
+  .btn:hover {
+    border-bottom: none;
+  }
+  .btn-primary {
+    background: white;
+    color: var(--color-accent);
+  }
+  .btn-primary:hover {
+    background: var(--color-bg);
+  }
+  .btn-large {
+    font-size: 1rem;
+    padding: 1rem 2.5rem;
+  }
+</style>
