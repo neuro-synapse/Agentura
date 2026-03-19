@@ -2,364 +2,1148 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Agentura">
+<Layout title="Agentura — Dependable AI for real work">
+
+  <!-- ═══ NAV ═══ -->
   <nav class="nav">
     <div class="nav-inner">
-      <a href="/" class="logo">Agentura</a>
+      <a href="/" class="wordmark">Agentura</a>
       <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#how">How it works</a>
-        <a href="#cta" class="btn-nav">Get started</a>
+        <a href="#problems">Problems</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#process">Process</a>
+        <a href="#principles">Principles</a>
+        <a href="#contact" class="nav-cta">Talk to us</a>
       </div>
+      <button class="menu-toggle" aria-label="Menu">
+        <span></span><span></span>
+      </button>
     </div>
   </nav>
 
   <main>
+
+    <!-- ═══ HERO ═══ -->
     <section class="hero">
-      <div class="hero-glow"></div>
-      <div class="container">
-        <span class="badge">Now in beta</span>
-        <h1>Autonomous agents<br /><span class="gradient-text">that actually work</span></h1>
-        <p class="subtitle">
-          Agentura lets you design, deploy, and observe AI agents that operate
-          independently — with guardrails you control.
-        </p>
+      <div class="hero-inner">
+        <div class="hero-label">
+          <span class="label-dot"></span>
+          <span class="label-text">AI implementation for operations teams</span>
+        </div>
+        <h1>We turn AI from demos<br/>into dependable tools<br/>that do <em>real work</em>.</h1>
+        <div class="hero-sub">
+          <p>Most teams have seen impressive AI prototypes. A bot that drafts emails. An "agent" that clicks around a browser. A script that summarizes documents.</p>
+          <p>These demos rarely make it into day-to-day operations. They break on edge cases, can't be trusted with real data, and need constant babysitting.</p>
+          <p class="hero-bold">Our job is to close that gap.</p>
+        </div>
         <div class="hero-actions">
-          <a href="#cta" class="btn btn-primary">Start building</a>
-          <a href="#how" class="btn btn-secondary">See how it works</a>
+          <a href="#contact" class="btn btn-primary">Start a conversation</a>
+          <a href="#process" class="btn btn-ghost">See how we work</a>
+        </div>
+      </div>
+      <div class="hero-aside">
+        <div class="aside-card">
+          <span class="aside-label">We are not selling</span>
+          <span class="aside-strike">"AI agents"</span>
+          <span class="aside-strike">"AGI"</span>
+          <span class="aside-strike">"LLM-native platforms"</span>
+          <span class="aside-divider"></span>
+          <span class="aside-label">We are selling</span>
+          <span class="aside-real">Dependable software that happens to use modern AI under the hood.</span>
         </div>
       </div>
     </section>
 
-    <section id="features" class="features">
+    <!-- ═══ WHAT WE DO (compact) ═══ -->
+    <section class="what-we-do">
       <div class="container">
-        <h2>Built for serious agent work</h2>
-        <div class="grid">
-          <div class="card">
-            <div class="card-icon">&#x1F9E0;</div>
-            <h3>Reasoning loops</h3>
-            <p>Agents plan, act, and reflect in structured loops — no spaghetti chains.</p>
+        <div class="capability-grid">
+          <div class="capability">
+            <span class="cap-num">01</span>
+            <p>Identify high-value workflows where AI can remove large amounts of manual work</p>
           </div>
-          <div class="card">
-            <div class="card-icon">&#x1F6E1;</div>
-            <h3>Guardrails</h3>
-            <p>Define boundaries, budgets, and approval gates before agents go live.</p>
+          <div class="capability">
+            <span class="cap-num">02</span>
+            <p>Design, build, and deploy systems that plug into your existing tools</p>
           </div>
-          <div class="card">
-            <div class="card-icon">&#x1F50D;</div>
-            <h3>Observability</h3>
-            <p>Full trace of every decision, tool call, and state change in real time.</p>
+          <div class="capability">
+            <span class="cap-num">03</span>
+            <p>Set clear guardrails so the system is useful but predictable and reviewable</p>
           </div>
-          <div class="card">
-            <div class="card-icon">&#x26A1;</div>
-            <h3>Edge-native</h3>
-            <p>Runs on Cloudflare Workers — low latency, global scale, zero servers to manage.</p>
-          </div>
-          <div class="card">
-            <div class="card-icon">&#x1F527;</div>
-            <h3>Tool ecosystem</h3>
-            <p>Connect any API as a tool. MCP-compatible out of the box.</p>
-          </div>
-          <div class="card">
-            <div class="card-icon">&#x1F465;</div>
-            <h3>Multi-agent</h3>
-            <p>Compose agents into teams with delegation, handoffs, and shared state.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="how" class="how">
-      <div class="container">
-        <h2>How it works</h2>
-        <div class="steps">
-          <div class="step">
-            <div class="step-num">1</div>
-            <div>
-              <h3>Define your agent</h3>
-              <p>Describe its goal, tools, and constraints in a simple config.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <div>
-              <h3>Deploy to the edge</h3>
-              <p>One command to push your agent to Cloudflare's global network.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <div>
-              <h3>Observe & iterate</h3>
-              <p>Watch your agent work in real time. Adjust guardrails as you learn.</p>
-            </div>
+          <div class="capability">
+            <span class="cap-num">04</span>
+            <p>Leave you with something you own: documented, observable, maintainable</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="cta" class="cta">
+    <!-- ═══ PROBLEMS ═══ -->
+    <section id="problems" class="section section-dark">
       <div class="container">
-        <h2>Ready to build?</h2>
-        <p>Get started with Agentura in under 5 minutes.</p>
-        <code class="install-cmd">npx create-agentura@latest my-agent</code>
-        <a href="https://github.com" class="btn btn-primary" style="margin-top: 1.5rem;">View on GitHub</a>
+        <div class="section-header">
+          <span class="section-num">I</span>
+          <h2>Problems<br/>we focus on</h2>
+        </div>
+        <div class="two-col">
+          <div class="col-left">
+            <p class="lead">We focus on repetitive, information-heavy work where smart people currently spend time doing things that don't require their full intelligence.</p>
+            <div class="focus-list">
+              <div class="focus-item">
+                <span class="focus-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7h16" stroke="currentColor" stroke-width="1.5"/><path d="M6 11h4M6 14h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </span>
+                Reading lots of text — emails, tickets, contracts, reports
+              </div>
+              <div class="focus-item">
+                <span class="focus-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </span>
+                Making routine decisions based on clear rules and context
+              </div>
+              <div class="focus-item">
+                <span class="focus-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 10h3l2-5 3 10 2-5h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                Updating systems of record — CRM, helpdesk, project tools
+              </div>
+              <div class="focus-item">
+                <span class="focus-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="2" width="14" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 6h6M7 10h6M7 14h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </span>
+                Preparing for meetings — context, summaries, follow-ups
+              </div>
+            </div>
+          </div>
+          <div class="col-right">
+            <h3 class="col-heading">Typical clients</h3>
+            <div class="client-list">
+              <div class="client-item">
+                <span class="client-label">Support & Success</span>
+                <span class="client-desc">Large volumes of similar questions</span>
+              </div>
+              <div class="client-item">
+                <span class="client-label">Sales</span>
+                <span class="client-desc">Lead follow-up, CRM updates, call prep</span>
+              </div>
+              <div class="client-item">
+                <span class="client-label">Operations</span>
+                <span class="client-desc">Data reconciliation, weekly reporting</span>
+              </div>
+              <div class="client-item">
+                <span class="client-label">Legal & Compliance</span>
+                <span class="client-desc">First-pass review and triage of documents</span>
+              </div>
+            </div>
+
+            <div class="criteria-box">
+              <h4>We look for work that:</h4>
+              <ul>
+                <li>Happens every day</li>
+                <li>Has clear definitions of "good" and "bad"</li>
+                <li>Is painful enough that automation would be felt quickly</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- ═══ DELIVERABLES ═══ -->
+    <section id="deliverables" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">II</span>
+          <h2>What we<br/>deliver</h2>
+        </div>
+
+        <div class="deliverables-grid">
+          <div class="deliverable">
+            <div class="del-header">
+              <span class="del-num">A</span>
+              <h3>An AI-powered workflow inside your existing tools</h3>
+            </div>
+            <div class="del-examples">
+              <div class="example">
+                <span class="example-arrow">&rarr;</span>
+                <p>A support assistant that reads new tickets, drafts a reply, suggests actions, and updates fields in your helpdesk — always with human final approval.</p>
+              </div>
+              <div class="example">
+                <span class="example-arrow">&rarr;</span>
+                <p>A meeting prep workflow that reads your calendar, pulls 90 days of emails and documents about that account, and prepares a one-page brief and draft agenda.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable">
+            <div class="del-header">
+              <span class="del-num">B</span>
+              <h3>A "virtual teammate" available via email or Slack</h3>
+            </div>
+            <div class="del-examples">
+              <div class="example">
+                <span class="example-arrow">&rarr;</span>
+                <p>An internal research assistant you can DM: <span class="inline-quote">"Summarize everything we know about Client X from the last year and highlight open risks."</span></p>
+              </div>
+              <div class="example">
+                <span class="example-arrow">&rarr;</span>
+                <p>A follow-up assistant that watches a channel or inbox, drafts replies, and nudges humans when something important is stuck.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable">
+            <div class="del-header">
+              <span class="del-num">C</span>
+              <h3>A playbook and infrastructure for doing this repeatedly</h3>
+            </div>
+            <div class="del-examples">
+              <div class="example">
+                <span class="example-arrow">&rarr;</span>
+                <p>Set up a small "AI pod" (1–3 people + tools) inside your org with standards for prompts, evaluation, logging, and approvals.</p>
+              </div>
+              <div class="example">
+                <span class="example-arrow">&rarr;</span>
+                <p>Create templates so new AI workflows can be designed and deployed faster and more safely.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="always-box">
+          <h4>In all cases, we deliver:</h4>
+          <div class="always-grid">
+            <div class="always-item">
+              <span class="always-check">&check;</span>
+              Working software wired into your environment
+            </div>
+            <div class="always-item">
+              <span class="always-check">&check;</span>
+              Documentation your engineers can read
+            </div>
+            <div class="always-item">
+              <span class="always-check">&check;</span>
+              Monitoring and logs — what it did and why
+            </div>
+            <div class="always-item">
+              <span class="always-check">&check;</span>
+              Clear ownership: who maintains it, how changes are made
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROCESS ═══ -->
+    <section id="process" class="section section-dark">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">III</span>
+          <h2>How we<br/>work</h2>
+        </div>
+        <p class="section-intro">A simple, repeatable process. No mystery, no magic.</p>
+
+        <div class="process-timeline">
+          <div class="process-step">
+            <div class="step-marker">
+              <span class="step-number">1</span>
+              <span class="step-line"></span>
+            </div>
+            <div class="step-content">
+              <h3>Understand the work, not the hype</h3>
+              <p>We sit with the people who actually do the work today: support reps, salespeople, analysts, operations staff. We watch how it's done in your real tools. We avoid designing from slide decks.</p>
+              <div class="step-outcome">
+                <span class="outcome-label">Outcome</span>
+                A short list of 2–3 candidate workflows, described in plain language with current pain, volume, and risk.
+              </div>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <div class="step-marker">
+              <span class="step-number">2</span>
+              <span class="step-line"></span>
+            </div>
+            <div class="step-content">
+              <h3>Choose one narrow, valuable workflow</h3>
+              <p>Small enough to ship in a few weeks. Important enough that success is obvious. We avoid "automate everything for our whole department" and vague goals like "make us more AI-powered."</p>
+              <div class="step-outcome">
+                <span class="outcome-label">Outcome</span>
+                One well-defined workflow with clear success criteria: time saved, response quality, or reduction in manual data entry.
+              </div>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <div class="step-marker">
+              <span class="step-number">3</span>
+              <span class="step-line"></span>
+            </div>
+            <div class="step-content">
+              <h3>Design the guardrails</h3>
+              <p>Before we write code, we design the safety boundaries. What the system can do on its own. What needs human approval. What data it can see. What must be logged. We assume AI can be wrong and design accordingly.</p>
+              <div class="step-outcome">
+                <span class="outcome-label">Outcome</span>
+                A short "contract" for the system: scope, allowed actions, and required checks.
+              </div>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <div class="step-marker">
+              <span class="step-number">4</span>
+              <span class="step-line"></span>
+            </div>
+            <div class="step-content">
+              <h3>Build the first version in your environment</h3>
+              <p>Connect to your tools via APIs and webhooks. Implement end-to-end including prompts, tools, and logging. Deploy with a small pilot group. We favor simple surfaces — email over dashboards, Slack over custom UI.</p>
+              <div class="step-outcome">
+                <span class="outcome-label">Outcome</span>
+                A functioning workflow your team can use on real, initially low-risk work.
+              </div>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <div class="step-marker">
+              <span class="step-number">5</span>
+              <span class="step-line"></span>
+            </div>
+            <div class="step-content">
+              <h3>Test on real work, measure, and adjust</h3>
+              <p>Run the system alongside humans for a few weeks. Compare AI suggestions to human decisions. Track errors and edge cases. Measure time saved. Iterate until the system is reliable and predictable.</p>
+              <div class="step-outcome">
+                <span class="outcome-label">Outcome</span>
+                A hardened workflow that your team trusts for a clearly defined slice of work.
+              </div>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <div class="step-marker">
+              <span class="step-number">6</span>
+            </div>
+            <div class="step-content">
+              <h3>Hand off and (optionally) expand</h3>
+              <p>Document the system: architecture, prompts, failure modes, operating procedures. Train your team. Agree on a support model. If you want to go further, we repeat the cycle — now faster because the basics are in place.</p>
+              <div class="step-outcome">
+                <span class="outcome-label">Outcome</span>
+                A system your team owns, understands, and can extend independently.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PRINCIPLES ═══ -->
+    <section id="principles" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">IV</span>
+          <h2>How we're<br/>different</h2>
+        </div>
+
+        <div class="principles-grid">
+          <div class="principle">
+            <div class="principle-header">
+              <span class="principle-num">01</span>
+              <h3>Plain language over jargon</h3>
+            </div>
+            <p>We describe what the system does in simple terms: "reads tickets, drafts replies, suggests actions." How it works internally is our problem, not yours.</p>
+          </div>
+
+          <div class="principle">
+            <div class="principle-header">
+              <span class="principle-num">02</span>
+              <h3>Production over prototypes</h3>
+            </div>
+            <p>We care less about clever demos and more about what runs every day without drama. If it can't survive bad data, weird edge cases, and real users, we don't consider it done.</p>
+          </div>
+
+          <div class="principle">
+            <div class="principle-header">
+              <span class="principle-num">03</span>
+              <h3>Guardrails first, then autonomy</h3>
+            </div>
+            <p>We start with humans firmly in control. Only once we see stable behavior and clear logs do we discuss granting more autonomy.</p>
+          </div>
+
+          <div class="principle">
+            <div class="principle-header">
+              <span class="principle-num">04</span>
+              <h3>Knowledge transfer, not dependency</h3>
+            </div>
+            <p>We aim to make ourselves less necessary over time. Code, docs, and patterns your team can extend — not a black box only we can touch.</p>
+          </div>
+
+          <div class="principle">
+            <div class="principle-header">
+              <span class="principle-num">05</span>
+              <h3>Honesty about fit</h3>
+            </div>
+            <p>Some problems are not good candidates — stakes too high, rules too fuzzy, or volume too low. We will say so upfront rather than sell you something that won't work.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section id="contact" class="section section-cta">
+      <div class="container">
+        <div class="cta-inner">
+          <h2>Let's find the right workflow.</h2>
+          <p>We start every engagement with a short conversation — no pitch, no pressure. We'll ask about your team's daily work and tell you honestly whether we can help.</p>
+          <a href="mailto:hello@agentura.dev" class="btn btn-primary btn-large">hello@agentura.dev</a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
+  <!-- ═══ FOOTER ═══ -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2026 Agentura. Built on Cloudflare.</p>
+      <div class="footer-inner">
+        <span class="footer-mark">Agentura</span>
+        <span class="footer-copy">&copy; 2026</span>
+      </div>
     </div>
   </footer>
+
 </Layout>
 
 <style>
-  /* Nav */
+  /* ══════════════════════════════════════
+     NAV
+     ══════════════════════════════════════ */
   .nav {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 100;
+    background: rgba(245, 242, 236, 0.92);
     backdrop-filter: blur(12px);
-    background: rgba(10, 10, 15, 0.8);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-border);
   }
   .nav-inner {
-    max-width: 1100px;
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 1.1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .logo {
-    font-size: 1.25rem;
-    font-weight: 700;
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
     color: var(--color-text);
-    letter-spacing: -0.02em;
+    border-bottom: none;
+    letter-spacing: -0.01em;
   }
-  .logo:hover { text-decoration: none; }
+  .wordmark:hover { border-bottom: none; }
   .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
     align-items: center;
   }
-  .nav-links a { color: var(--color-text-muted); font-size: 0.9rem; }
-  .nav-links a:hover { color: var(--color-text); text-decoration: none; }
-  .btn-nav {
-    background: var(--color-accent);
-    color: white !important;
-    padding: 0.5rem 1.25rem;
-    border-radius: 8px;
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
     font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    border-bottom: none;
   }
-  .btn-nav:hover { opacity: 0.9; }
+  .nav-links a:hover {
+    color: var(--color-text);
+    border-bottom: none;
+  }
+  .nav-cta {
+    background: var(--color-text);
+    color: var(--color-bg) !important;
+    padding: 0.55rem 1.3rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover {
+    background: var(--color-accent) !important;
+  }
+  .menu-toggle { display: none; }
 
-  /* Layout */
+  /* ══════════════════════════════════════
+     CONTAINER
+     ══════════════════════════════════════ */
   .container {
-    max-width: 1100px;
+    max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 2rem;
   }
 
-  /* Hero */
-  .hero {
-    position: relative;
-    padding: 10rem 0 6rem;
-    text-align: center;
-    overflow: hidden;
-  }
-  .hero-glow {
-    position: absolute;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 800px;
-    height: 600px;
-    background: radial-gradient(ellipse, var(--color-glow) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .badge {
+  /* ══════════════════════════════════════
+     BUTTONS
+     ══════════════════════════════════════ */
+  .btn {
     display: inline-block;
-    padding: 0.35rem 1rem;
-    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
     font-weight: 500;
-    color: var(--color-accent-light);
-    border: 1px solid var(--color-accent);
-    border-radius: 999px;
-    margin-bottom: 2rem;
     letter-spacing: 0.03em;
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    border-bottom: none;
+    transition: all 0.2s;
   }
-  h1 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
+  .btn:hover { border-bottom: none; }
+  .btn-primary {
+    background: var(--color-text);
+    color: var(--color-bg);
   }
-  .gradient-text {
-    background: linear-gradient(135deg, var(--color-accent-light), #74b9ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .btn-primary:hover {
+    background: var(--color-accent);
+    color: white;
   }
-  .subtitle {
-    font-size: 1.2rem;
-    color: var(--color-text-muted);
-    max-width: 560px;
-    margin: 0 auto 2.5rem;
-    line-height: 1.6;
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-text);
+    box-shadow: inset 0 0 0 1.5px var(--color-border-strong);
+  }
+  .btn-ghost:hover {
+    box-shadow: inset 0 0 0 1.5px var(--color-accent);
+    color: var(--color-accent);
+  }
+  .btn-large {
+    font-size: 1rem;
+    padding: 1rem 2.5rem;
+  }
+
+  /* ══════════════════════════════════════
+     HERO
+     ══════════════════════════════════════ */
+  .hero {
+    padding: 10rem 2rem 6rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 4rem;
+    align-items: start;
+  }
+  .hero-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .label-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .label-text {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--color-accent);
+  }
+  .hero-sub {
+    max-width: 540px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-sub p {
+    color: var(--color-text-secondary);
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+  .hero-bold {
+    color: var(--color-text) !important;
+    font-weight: 600;
+    font-size: 1.1rem !important;
   }
   .hero-actions {
     display: flex;
     gap: 1rem;
-    justify-content: center;
     flex-wrap: wrap;
   }
 
-  /* Buttons */
-  .btn {
-    display: inline-block;
-    padding: 0.75rem 2rem;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.2s;
-  }
-  .btn:hover { text-decoration: none; }
-  .btn-primary {
-    background: var(--color-accent);
-    color: white;
-  }
-  .btn-primary:hover {
-    box-shadow: 0 0 24px var(--color-glow);
-    transform: translateY(-1px);
-  }
-  .btn-secondary {
-    background: var(--color-surface);
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-  }
-  .btn-secondary:hover {
-    border-color: var(--color-accent);
-  }
-
-  /* Features */
-  .features {
-    padding: 6rem 0;
-  }
-  .features h2, .how h2, .cta h2 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 3rem;
-    letter-spacing: -0.02em;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-  .card {
+  /* Hero aside card */
+  .aside-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 14px;
+    border-radius: 6px;
     padding: 2rem;
-    transition: border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
-  .card:hover {
-    border-color: var(--color-accent);
-  }
-  .card-icon {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-  }
-  .card h3 {
-    font-size: 1.1rem;
+  .aside-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-  .card p {
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--color-text-muted);
+  }
+  .aside-strike {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    text-decoration: line-through;
+    text-decoration-color: var(--color-red);
+    text-decoration-thickness: 2px;
+    color: var(--color-text-muted);
+  }
+  .aside-divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 0.5rem 0;
+  }
+  .aside-real {
     font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-accent);
     line-height: 1.5;
   }
 
-  /* How */
-  .how {
-    padding: 6rem 0;
+  /* ══════════════════════════════════════
+     WHAT WE DO (capabilities strip)
+     ══════════════════════════════════════ */
+  .what-we-do {
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: 3rem 0;
   }
-  .steps {
-    max-width: 600px;
-    margin: 0 auto;
+  .capability-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .capability {
+    padding: 0 2rem;
+    border-left: 1px solid var(--color-border);
+  }
+  .capability:first-child { border-left: none; padding-left: 0; }
+  .capability:last-child { padding-right: 0; }
+  .cap-num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .capability p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+  }
+
+  /* ══════════════════════════════════════
+     SECTIONS (shared)
+     ══════════════════════════════════════ */
+  .section {
+    padding: var(--space-xl) 0;
+  }
+  .section-dark {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
+  .section-dark .section-num { color: var(--color-highlight); }
+  .section-dark a { color: var(--color-highlight); }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+  }
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    padding-top: 0.75rem;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .section-intro {
+    font-size: 1.1rem;
+    color: rgba(245,242,236,0.6);
+    margin-top: -2rem;
+    margin-bottom: 3.5rem;
+    max-width: 500px;
+  }
+
+  /* ══════════════════════════════════════
+     PROBLEMS
+     ══════════════════════════════════════ */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+  .lead {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(245,242,236,0.75);
+    margin-bottom: 2.5rem;
+  }
+  .focus-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .focus-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: rgba(245,242,236,0.85);
+  }
+  .focus-icon {
+    flex-shrink: 0;
+    color: var(--color-highlight);
+    margin-top: 2px;
+  }
+  .col-heading {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-highlight);
+    margin-bottom: 1.5rem;
+  }
+  .client-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .client-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(245,242,236,0.1);
+  }
+  .client-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: rgba(245,242,236,0.95);
+  }
+  .client-desc {
+    font-size: 0.85rem;
+    color: rgba(245,242,236,0.5);
+  }
+  .criteria-box {
+    background: rgba(245,242,236,0.06);
+    border: 1px solid rgba(245,242,236,0.1);
+    border-radius: 6px;
+    padding: 1.5rem;
+  }
+  .criteria-box h4 {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.5);
+    margin-bottom: 1rem;
+  }
+  .criteria-box ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .criteria-box li {
+    font-size: 0.9rem;
+    color: rgba(245,242,236,0.85);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .criteria-box li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-highlight);
+  }
+
+  /* ══════════════════════════════════════
+     DELIVERABLES
+     ══════════════════════════════════════ */
+  .deliverables-grid {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    margin-bottom: 3rem;
   }
-  .step {
+  .deliverable {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 2.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+  .del-header {
     display: flex;
-    gap: 1.5rem;
     align-items: flex-start;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
   }
-  .step-num {
-    flex-shrink: 0;
-    width: 44px;
-    height: 44px;
+  .del-num {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: rgba(13,107,110,0.08);
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--color-accent);
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 1.1rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
   }
-  .step h3 {
-    font-size: 1.1rem;
+  .del-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1.35;
+  }
+  .del-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-left: 3.5rem;
+  }
+  .example {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .example-arrow {
+    color: var(--color-accent);
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .example p {
+    font-size: 0.92rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+  .inline-quote {
+    font-style: italic;
+    color: var(--color-text);
+    background: rgba(13,107,110,0.06);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+  }
+
+  .always-box {
+    border-top: 2px solid var(--color-text);
+    padding-top: 2rem;
+  }
+  .always-box h4 {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+  .always-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .always-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.92rem;
+    color: var(--color-text-secondary);
+  }
+  .always-check {
+    color: var(--color-accent);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  /* ══════════════════════════════════════
+     PROCESS
+     ══════════════════════════════════════ */
+  .process-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .process-step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 2rem;
+    min-height: 200px;
+  }
+  .step-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .step-number {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--color-highlight);
+    border-radius: 50%;
+    color: var(--color-highlight);
+    flex-shrink: 0;
+  }
+  .step-line {
+    width: 1px;
+    flex: 1;
+    background: rgba(245,242,236,0.15);
+    margin: 0.75rem 0;
+  }
+  .step-content {
+    padding-bottom: 3rem;
+  }
+  .step-content h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: rgba(245,242,236,0.95);
+  }
+  .step-content > p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(245,242,236,0.6);
+    max-width: 600px;
+    margin-bottom: 1.5rem;
+  }
+  .step-outcome {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: rgba(245,242,236,0.8);
+    padding: 1rem 1.25rem;
+    background: rgba(245,242,236,0.05);
+    border-left: 2px solid var(--color-highlight);
+    border-radius: 0 4px 4px 0;
+  }
+  .outcome-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-highlight);
+    display: block;
     margin-bottom: 0.3rem;
   }
-  .step p {
-    color: var(--color-text-muted);
-    line-height: 1.5;
-  }
 
-  /* CTA */
-  .cta {
-    padding: 6rem 0;
-    text-align: center;
+  /* ══════════════════════════════════════
+     PRINCIPLES
+     ══════════════════════════════════════ */
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
   }
-  .cta p {
-    color: var(--color-text-muted);
-    margin-bottom: 2rem;
-    font-size: 1.1rem;
-  }
-  .install-cmd {
-    display: inline-block;
-    background: var(--color-surface);
+  .principle {
+    padding: 2rem;
     border: 1px solid var(--color-border);
-    padding: 0.75rem 1.5rem;
-    border-radius: 10px;
-    font-family: "SF Mono", "Fira Code", monospace;
-    font-size: 0.95rem;
-    color: var(--color-accent-light);
-    user-select: all;
+    border-radius: 6px;
+    transition: border-color 0.2s;
+  }
+  .principle:hover {
+    border-color: var(--color-accent);
+  }
+  .principle-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .principle-num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+  }
+  .principle h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+  .principle p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
   }
 
-  /* Footer */
+  /* ══════════════════════════════════════
+     CTA
+     ══════════════════════════════════════ */
+  .section-cta {
+    background: var(--color-accent);
+    color: white;
+    padding: var(--space-xl) 0;
+  }
+  .cta-inner {
+    max-width: 600px;
+  }
+  .cta-inner h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+  }
+  .cta-inner p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 2rem;
+  }
+  .section-cta .btn-primary {
+    background: white;
+    color: var(--color-accent);
+    font-size: 1rem;
+  }
+  .section-cta .btn-primary:hover {
+    background: var(--color-bg);
+  }
+
+  /* ══════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════ */
   .footer {
     border-top: 1px solid var(--color-border);
-    padding: 2rem 0;
-    text-align: center;
+    padding: 1.5rem 0;
   }
-  .footer p {
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-mark {
+    font-family: var(--font-display);
+    font-size: 1rem;
     color: var(--color-text-muted);
-    font-size: 0.85rem;
+  }
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
   }
 
-  /* Mobile */
+  /* ══════════════════════════════════════
+     RESPONSIVE
+     ══════════════════════════════════════ */
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 8rem 2rem 4rem;
+      gap: 2rem;
+    }
+    .hero-aside { order: -1; }
+    .two-col { grid-template-columns: 1fr; gap: 3rem; }
+    .capability-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .capability { border-left: none; padding: 0; }
+    .always-grid { grid-template-columns: 1fr; }
+    .del-examples { padding-left: 0; }
+  }
+
   @media (max-width: 640px) {
-    .nav-links a:not(.btn-nav) { display: none; }
-    .hero { padding: 8rem 0 4rem; }
+    .nav-links { display: none; }
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .menu-toggle span {
+      width: 20px;
+      height: 1.5px;
+      background: var(--color-text);
+    }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .container { padding: 0 1.5rem; }
+    .capability-grid { grid-template-columns: 1fr; }
+    .process-step { grid-template-columns: 44px 1fr; gap: 1.25rem; }
+    .principles-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ══════════════════════════════════════
+     ENTRANCE ANIMATIONS
+     ══════════════════════════════════════ */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-inner, .hero-aside, .deliverable, .principle, .process-step {
+      animation: fadeUp 0.6s ease-out both;
+    }
+    .hero-aside { animation-delay: 0.15s; }
+    .deliverable:nth-child(2) { animation-delay: 0.1s; }
+    .deliverable:nth-child(3) { animation-delay: 0.2s; }
+    .principle:nth-child(2) { animation-delay: 0.05s; }
+    .principle:nth-child(3) { animation-delay: 0.1s; }
+    .principle:nth-child(4) { animation-delay: 0.15s; }
+    .principle:nth-child(5) { animation-delay: 0.2s; }
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
