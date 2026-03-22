@@ -96,10 +96,18 @@ const posts = (await getCollection("blog")).sort(
     margin-bottom: 1.5rem;
   }
   .blog-intro {
-    font-size: 1.1rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.15rem;
     color: var(--color-text-secondary);
     max-width: 600px;
     line-height: 1.7;
+    padding-bottom: 3rem;
+    background-image: linear-gradient(90deg, var(--color-accent), var(--color-accent-light), transparent);
+    background-size: 200px 1px;
+    background-position: bottom left;
+    background-repeat: no-repeat;
   }
   .section {
     padding: var(--space-xl) 0;

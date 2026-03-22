@@ -228,6 +228,8 @@ import { tracks } from "../data/services";
   .btn-primary:hover {
     background: var(--color-accent);
     color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139,69,19,0.2);
   }
   .btn-ghost {
     background: transparent;
@@ -237,6 +239,7 @@ import { tracks } from "../data/services";
   .btn-ghost:hover {
     box-shadow: inset 0 0 0 1.5px var(--color-accent);
     color: var(--color-accent);
+    transform: translateY(-1px);
   }
 
   /* ══════════════════════════════════════
@@ -390,6 +393,14 @@ import { tracks } from "../data/services";
   .capability {
     padding: 0 2rem;
     border-left: 1px solid var(--color-border);
+    transition: background 0.3s;
+    border-radius: 2px;
+  }
+  .capability:hover {
+    background: rgba(139, 69, 19, 0.02);
+  }
+  .capability:hover .cap-num {
+    letter-spacing: 0.12em;
   }
   .capability:first-child { border-left: none; padding-left: 0; }
   .capability:last-child { padding-right: 0; }
@@ -401,6 +412,7 @@ import { tracks } from "../data/services";
     letter-spacing: 0.06em;
     display: block;
     margin-bottom: 0.75rem;
+    transition: letter-spacing 0.3s;
   }
   .capability p {
     font-size: 0.92rem;
@@ -417,6 +429,16 @@ import { tracks } from "../data/services";
   .section-dark {
     background: var(--color-text);
     color: var(--color-bg);
+    position: relative;
+  }
+  .section-dark::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 30%, rgba(139,69,19,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 70%, rgba(196,149,106,0.05) 0%, transparent 50%);
+    pointer-events: none;
   }
   .section-warm {
     background: var(--color-bg-warm);

@@ -206,22 +206,25 @@ const trackIIIServices = getServicesByTrack('III');
   }
   .cover-nav a {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-text-muted);
     border-bottom: none;
-    transition: color 0.3s;
+    transition: color 0.3s, padding-left 0.3s;
     padding: 0.2rem 0;
   }
   .cover-nav a:hover {
     color: var(--color-accent);
     border-bottom: none;
+    padding-left: 0.5rem;
   }
   .cover-nav .num {
     color: var(--color-accent-light);
     margin-right: 0.5em;
     font-weight: 500;
+    display: inline-block;
+    min-width: 1.8em;
   }
   .nav-divider {
     width: 30px;

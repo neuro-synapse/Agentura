@@ -72,6 +72,11 @@ const { service } = Astro.props;
     text-transform: uppercase;
     color: var(--color-accent);
     margin-bottom: 0.7rem;
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid rgba(139, 69, 19, 0.2);
+    border-radius: 2px;
+    background: rgba(139, 69, 19, 0.03);
   }
   .s-name {
     font-family: var(--font-serif);
@@ -137,12 +142,17 @@ const { service } = Astro.props;
   }
   .del-marker {
     font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.08em;
+    font-size: 0.52rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-accent);
     flex-shrink: 0;
     min-width: 56px;
+    background: rgba(139, 69, 19, 0.05);
+    border: 1px solid rgba(139, 69, 19, 0.1);
+    border-radius: 2px;
+    padding: 0.15rem 0.4rem;
+    text-align: center;
   }
   .s-connector {
     margin-top: 2.2rem;
