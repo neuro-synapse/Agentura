@@ -42,12 +42,13 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
     padding: 2rem;
     color: var(--color-text);
     border-bottom: 1px solid var(--color-border);
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
   }
   .post-card:hover {
     border-color: var(--color-accent);
     border-bottom-color: var(--color-accent);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
   }
   .post-meta {
     display: flex;
@@ -58,9 +59,9 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
   }
   .post-meta time {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 500;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-text-muted);
   }
@@ -70,12 +71,13 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
   }
   .tag {
     font-family: var(--font-mono);
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     font-weight: 500;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-accent);
-    background: var(--color-accent-faint);
+    background: rgba(139, 69, 19, 0.08);
+    border: 1px solid rgba(139, 69, 19, 0.12);
     padding: 0.2rem 0.5rem;
     border-radius: 3px;
   }
@@ -95,9 +97,9 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
   }
   .read-link {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 500;
     color: var(--color-accent);
-    letter-spacing: 0.03em;
+    letter-spacing: 0.06em;
   }
 </style>

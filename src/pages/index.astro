@@ -270,9 +270,9 @@ import { tracks } from "../data/services";
   }
   .label-text {
     font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-size: 0.68rem;
     font-weight: 500;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
   }
@@ -323,8 +323,8 @@ import { tracks } from "../data/services";
   }
   .aside-label {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-size: 0.68rem;
+    font-weight: 500;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-text-muted);
@@ -370,10 +370,10 @@ import { tracks } from "../data/services";
   .capability:last-child { padding-right: 0; }
   .cap-num {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-size: 0.68rem;
+    font-weight: 500;
     color: var(--color-accent);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     display: block;
     margin-bottom: 0.75rem;
   }
@@ -430,18 +430,20 @@ import { tracks } from "../data/services";
     padding: 2rem;
     color: rgba(245,242,236,0.9);
     border-bottom: 1px solid rgba(245,242,236,0.12);
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
   }
   .track-card:hover {
     border-color: var(--color-highlight);
     background: rgba(245,242,236,0.08);
     border-bottom-color: var(--color-highlight);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   }
   .track-label {
     font-family: var(--font-mono);
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     font-weight: 500;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-highlight);
     margin-bottom: 1rem;
@@ -462,18 +464,18 @@ import { tracks } from "../data/services";
   }
   .track-services {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.02em;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
     color: rgba(245,242,236,0.35);
     margin-bottom: 1.25rem;
     line-height: 1.6;
   }
   .track-link {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 500;
     color: var(--color-highlight);
-    letter-spacing: 0.03em;
+    letter-spacing: 0.06em;
   }
 
   /* ══════════════════════════════════════
