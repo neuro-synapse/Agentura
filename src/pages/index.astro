@@ -250,6 +250,20 @@ import { tracks } from "../data/services";
     grid-template-columns: 1fr 340px;
     gap: 4rem;
     align-items: start;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -4rem;
+    left: -10%;
+    right: -10%;
+    bottom: -4rem;
+    background:
+      radial-gradient(ellipse at 25% 45%, rgba(139,69,19,0.03) 0%, transparent 60%),
+      radial-gradient(ellipse at 75% 55%, rgba(139,69,19,0.02) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: -1;
   }
   .hero-label {
     display: flex;
@@ -319,7 +333,18 @@ import { tracks } from "../data/services";
     flex-direction: column;
     gap: 0.6rem;
     margin-top: 2rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(139,69,19,0.04);
+    position: relative;
+  }
+  .aside-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+    border-radius: 6px 6px 0 0;
   }
   .aside-label {
     font-family: var(--font-mono);
@@ -510,6 +535,8 @@ import { tracks } from "../data/services";
     border-radius: 50%;
     color: var(--color-accent);
     flex-shrink: 0;
+    background: var(--color-bg);
+    box-shadow: 0 0 0 4px var(--color-bg), 0 2px 8px rgba(139,69,19,0.08);
   }
   .step-line {
     width: 1px;

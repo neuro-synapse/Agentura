@@ -38,15 +38,15 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
     flex-direction: column;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-border);
     border-radius: 6px;
     padding: 2rem;
     color: var(--color-text);
-    border-bottom: 1px solid var(--color-border);
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    transition: border-color 0.2s, border-top-color 0.3s, box-shadow 0.2s, transform 0.2s;
   }
   .post-card:hover {
-    border-color: var(--color-accent);
-    border-bottom-color: var(--color-accent);
+    border-color: var(--color-border);
+    border-top-color: var(--color-accent);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     transform: translateY(-2px);
   }
@@ -101,5 +101,9 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
     font-weight: 500;
     color: var(--color-accent);
     letter-spacing: 0.06em;
+    transition: letter-spacing 0.2s;
+  }
+  .post-card:hover .read-link {
+    letter-spacing: 0.12em;
   }
 </style>

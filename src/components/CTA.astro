@@ -11,6 +11,7 @@ const {
 
 <section id="contact" class="section-cta">
   <div class="container">
+    <div class="cta-ornament"></div>
     <div class="cta-inner">
       <h2>{heading}</h2>
       <p>{body}</p>
@@ -24,6 +25,34 @@ const {
     background: var(--color-accent);
     color: white;
     padding: var(--space-xl) 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .section-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(0,0,0,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .cta-ornament {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.4);
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .cta-ornament::before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 50%;
+    top: -3px;
+    left: -10px;
   }
   .container {
     max-width: var(--max-width);

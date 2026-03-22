@@ -93,6 +93,24 @@ const links = [
     color: var(--color-text-muted);
     border-bottom: none;
     transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  .nav-links a:hover::after,
+  .nav-links a.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
   .nav-links a:hover,
   .nav-links a.active {
@@ -108,6 +126,9 @@ const links = [
     padding: 0.55rem 1.3rem;
     border-radius: 4px;
     transition: background 0.2s;
+  }
+  .nav-cta::after {
+    display: none;
   }
   .nav-cta:hover {
     background: var(--color-accent) !important;

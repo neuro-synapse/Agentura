@@ -3,6 +3,7 @@
 
 <footer class="footer">
   <div class="container">
+    <div class="footer-rule"></div>
     <div class="footer-inner">
       <span class="footer-mark">Agentura</span>
       <div class="footer-links">
@@ -18,8 +19,12 @@
 
 <style>
   .footer {
-    border-top: 1px solid var(--color-border);
-    padding: 1.5rem 0;
+    padding: 0 0 1.5rem;
+  }
+  .footer-rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), var(--color-accent-light), var(--color-border), transparent);
+    margin-bottom: 1.5rem;
   }
   .container {
     max-width: var(--max-width);
