@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, remarkPluginFrontmatter } = await render(post);
 
 const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -116,11 +116,12 @@ const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
   }
   .article-header h1 {
     font-family: var(--font-serif);
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
     margin-bottom: 1.25rem;
+    color: var(--color-text);
   }
   .article-desc {
     font-size: 1.1rem;
@@ -134,10 +135,25 @@ const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
 
   /* Article body — prose styles */
   .article-body {
-    font-size: 1.05rem;
-    line-height: 1.8;
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.75;
     color: var(--color-text);
+    font-weight: 300;
   }
+
+  /* Drop cap on first paragraph */
+  .article-body :global(p:first-of-type::first-letter) {
+    float: left;
+    font-size: 4.5rem;
+    line-height: 1;
+    padding-right: 0.6rem;
+    padding-top: 0.05em;
+    font-family: var(--font-serif);
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+
   .article-body :global(h2) {
     font-family: var(--font-serif);
     font-size: 1.6rem;
@@ -154,7 +170,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
     margin-bottom: 0.75rem;
   }
   .article-body :global(p) {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.6rem;
     color: var(--color-text-secondary);
   }
   .article-body :global(strong) {
@@ -173,16 +189,53 @@ const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
     margin-bottom: 0.5rem;
     color: var(--color-text-secondary);
   }
+
+  /* Blockquotes — editorial pull quotes */
   .article-body :global(blockquote) {
     border-left: 3px solid var(--color-accent);
-    margin: 2rem 0;
-    padding: 0.5rem 0 0.5rem 1.5rem;
+    margin: 2.5rem 0;
+    padding: 1rem 0 1rem 1.8rem;
     font-style: italic;
-    color: var(--color-text-muted);
+    background: var(--color-accent-faint);
   }
+  .article-body :global(blockquote p) {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: var(--color-text);
+    font-weight: 400;
+  }
+  .article-body :global(blockquote p:last-child) {
+    margin-bottom: 0;
+  }
+
+  /* Images — editorial with captions */
+  .article-body :global(img) {
+    width: calc(100% + 4rem);
+    max-width: calc(100% + 4rem);
+    margin-left: -2rem;
+    margin-right: -2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    background: var(--color-bg-warm);
+    padding: 0.4rem;
+  }
+  .article-body :global(img + em),
+  .article-body :global(p > img + br + em) {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
   .article-body :global(code) {
     font-family: var(--font-mono);
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     background: var(--color-bg-warm);
     padding: 0.15rem 0.4rem;
     border-radius: 3px;
@@ -209,10 +262,19 @@ const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
   .article-body :global(a:hover) {
     border-bottom-color: var(--color-accent);
   }
+
+  /* Section breaks — elegant *** */
   .article-body :global(hr) {
     border: none;
-    border-top: 1px solid var(--color-border);
     margin: 3rem 0;
+    text-align: center;
+  }
+  .article-body :global(hr)::after {
+    content: "* * *";
+    letter-spacing: 0.5em;
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    color: var(--color-accent);
   }
 
   @media (max-width: 768px) {
