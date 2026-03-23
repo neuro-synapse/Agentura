@@ -22,19 +22,32 @@ const { title, description = "Agentura — We design, build, and operationalize 
   <body>
     <slot />
     <script>
-      // Scroll-reveal observer
+      // Scroll-reveal with stagger support
       const revealObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
+              const delay = entry.target.dataset.revealDelay;
+              if (delay) {
+                entry.target.style.transitionDelay = delay;
+              }
               entry.target.classList.add('visible');
             }
           });
         },
-        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
       );
       document.querySelectorAll('[data-reveal]').forEach((el) => {
         revealObserver.observe(el);
+      });
+
+      // Auto-stagger sibling [data-stagger] children
+      document.querySelectorAll('[data-stagger]').forEach((parent) => {
+        const children = parent.querySelectorAll(':scope > [data-reveal]');
+        const base = parseFloat(parent.dataset.stagger) || 0.08;
+        children.forEach((child, i) => {
+          child.dataset.revealDelay = `${(i * base).toFixed(2)}s`;
+        });
       });
     </script>
   </body>

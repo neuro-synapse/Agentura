@@ -76,7 +76,7 @@ import { tracks } from "../data/services";
         <SectionHeader num="I" dark>What we<br/>do</SectionHeader>
         <p class="section-intro">Three tracks of services — each designed for a different stage and scale of agentic ambition.</p>
 
-        <div class="tracks-grid">
+        <div class="tracks-grid" data-stagger="0.12">
           <a href="/services#t1" class="track-card" data-reveal>
             <span class="track-label">{tracks.I.label}</span>
             <h3>{tracks.I.title}</h3>
@@ -177,7 +177,7 @@ import { tracks } from "../data/services";
       <div class="container">
         <SectionHeader num="III">What we<br/>believe</SectionHeader>
 
-        <div class="principles-grid">
+        <div class="principles-grid" data-stagger="0.08">
           {homepagePrinciples.map((p) => (
             <div data-reveal>
               <PrincipleCard number={p.number} title={p.title} body={p.body} />
@@ -295,15 +295,17 @@ import { tracks } from "../data/services";
   }
   .hero h1 {
     font-family: var(--font-serif);
-    font-size: clamp(2.8rem, 5vw, 4rem);
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+    font-weight: 300;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
     margin-bottom: 2rem;
   }
   .hero h1 em {
     font-style: italic;
+    font-weight: 500;
     color: var(--color-accent);
+    font-size: 1.05em;
   }
   .hero-sub {
     max-width: 540px;
@@ -381,10 +383,23 @@ import { tracks } from "../data/services";
      WHAT WE DO
      ══════════════════════════════════════ */
   .what-we-do {
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    padding: 3rem 0;
+    border-top: none;
+    border-bottom: none;
+    padding: 3.5rem 0;
+    background: var(--color-bg-warm);
+    position: relative;
   }
+  .what-we-do::before,
+  .what-we-do::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), var(--color-accent-light), var(--color-border), transparent);
+  }
+  .what-we-do::before { top: 0; }
+  .what-we-do::after { bottom: 0; }
   .capability-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -442,6 +457,14 @@ import { tracks } from "../data/services";
   }
   .section-warm {
     background: var(--color-bg-warm);
+    position: relative;
+  }
+  .section-warm::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(139,69,19,0.04) 0%, transparent 50%);
+    pointer-events: none;
   }
   .section-intro {
     font-size: 1.1rem;
@@ -473,18 +496,18 @@ import { tracks } from "../data/services";
     flex-direction: column;
     background: rgba(245,242,236,0.06);
     border: 1px solid rgba(245,242,236,0.12);
+    border-top: 2px solid rgba(196,149,106,0.3);
     border-radius: 6px;
     padding: 2rem;
     color: rgba(245,242,236,0.9);
-    border-bottom: 1px solid rgba(245,242,236,0.12);
-    transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+    transition: border-color 0.2s, border-top-color 0.3s, background 0.2s, transform 0.2s, box-shadow 0.2s;
   }
   .track-card:hover {
-    border-color: var(--color-highlight);
+    border-color: rgba(245,242,236,0.2);
+    border-top-color: var(--color-highlight);
     background: rgba(245,242,236,0.08);
-    border-bottom-color: var(--color-highlight);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   }
   .track-label {
     font-family: var(--font-mono);
@@ -571,9 +594,13 @@ import { tracks } from "../data/services";
   }
   .step-content h3 {
     font-family: var(--font-serif);
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     font-weight: 500;
     margin-bottom: 0.75rem;
+    transition: color 0.2s;
+  }
+  .process-step:hover .step-content h3 {
+    color: var(--color-accent);
   }
   .step-content > p {
     font-size: 0.95rem;

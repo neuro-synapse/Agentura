@@ -29,9 +29,9 @@ const posts = (await getCollection("blog")).sort(
       </div>
     </section>
 
-    <section class="section" data-reveal>
+    <section class="section">
       <div class="container">
-        <div class="posts-grid">
+        <div class="posts-grid" data-stagger="0.1">
           {posts.map((post) => (
             <BlogPostCard
               title={post.data.title}
@@ -89,10 +89,10 @@ const posts = (await getCollection("blog")).sort(
   }
   .blog-hero h1 {
     font-family: var(--font-serif);
-    font-size: clamp(2.8rem, 5vw, 4rem);
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-size: clamp(3.2rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
   }
   .blog-intro {

@@ -83,13 +83,13 @@ const numStr = String(number);
   .principle-number {
     font-family: var(--font-serif);
     font-weight: 300;
-    font-size: 3.5rem;
-    line-height: 1;
+    font-size: 5rem;
+    line-height: 0.85;
     color: var(--color-border);
     flex-shrink: 0;
-    min-width: 2.5rem;
+    min-width: 3rem;
     text-align: right;
-    transition: color 0.3s;
+    transition: color 0.4s;
   }
   .principle-full:hover .principle-number {
     color: var(--color-accent-light);
@@ -105,10 +105,14 @@ const numStr = String(number);
     font-family: var(--font-serif);
     font-weight: 300;
     font-size: 1.05rem;
-    line-height: 1.8;
+    line-height: 1.9;
     color: var(--color-text-secondary);
-    margin-left: calc(2.5rem + 1.2rem);
+    margin-left: calc(3rem + 1.2rem);
     max-width: 540px;
+  }
+  .principle-body::first-line {
+    font-weight: 400;
+    color: var(--color-text);
   }
 
   @media (max-width: 600px) {
@@ -116,14 +120,14 @@ const numStr = String(number);
       padding: 3rem 0;
     }
     .principle-number {
-      font-size: 2.5rem;
-      min-width: 2rem;
+      font-size: 3.5rem;
+      min-width: 2.2rem;
     }
     .principle-title {
       font-size: 1.3rem;
     }
     .principle-body {
-      margin-left: calc(2rem + 1.2rem);
+      margin-left: calc(2.2rem + 1.2rem);
       font-size: 0.95rem;
     }
   }
