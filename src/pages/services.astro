@@ -5,266 +5,533 @@ import Footer from "../components/Footer.astro";
 import TrackHeader from "../components/TrackHeader.astro";
 import ServiceCard from "../components/ServiceCard.astro";
 import CTA from "../components/CTA.astro";
-import { services, tracks, getServicesByTrack } from "../data/services";
+import { tracks, getServicesByTrack } from "../data/services";
+import { routeCtas, servicePathways } from "../data/site";
 
-const entryService = getServicesByTrack('entry')[0];
-const trackIServices = getServicesByTrack('I');
-const trackIIServices = getServicesByTrack('II');
-const trackIIIServices = getServicesByTrack('III');
+const servicesCta = routeCtas.services;
+const entryService = getServicesByTrack("entry")[0];
+const trackIServices = getServicesByTrack("I");
+const trackIIServices = getServicesByTrack("II");
+const trackIIIServices = getServicesByTrack("III");
 ---
 
-<Layout title="Services — Agentura">
-
+<Layout
+  title="Services — Agentura"
+  description="Decision-first service overview for teams evaluating where agentic systems belong."
+>
   <Nav />
 
   <main>
+    <section class="services-hero">
+      <div class="container hero-grid">
+        <div class="hero-copy" data-reveal>
+          <div class="hero-kicker">Decision-first overview</div>
+          <h1>Start with the smallest useful engagement.</h1>
+          <p class="hero-body">
+            This page is organized for orientation first and depth second. If you are
+            still deciding where agents belong, begin with the readiness assessment.
+            If you already know the shape of the work, jump to the track that matches
+            your context.
+          </p>
 
-    <!-- ═══ COVER ═══ -->
-    <section class="cover">
-      <div class="cover-orn"></div>
-      <div class="cover-kick">Service Architecture</div>
-      <h1 class="cover-title">How We <em>Work</em></h1>
-      <p class="cover-sub">
-        We design, build, and operationalize agentic systems<br />
-        that compound in value over time.<br />
-        Here is what that looks like in practice.
-      </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-large" href={servicesCta.primary.href}>
+              {servicesCta.primary.label}
+            </a>
+            <a class="btn btn-secondary btn-large" href="#assess">
+              See the assessment
+            </a>
+          </div>
+        </div>
 
-      <nav class="cover-nav">
-        <a href="#assess"><span class="num">00</span> Agentic Readiness Assessment</a>
-        <div class="nav-divider"></div>
-        <a href="#t1"><span class="num">I</span> For organizations building agentic systems</a>
-        {trackIServices.map((s) => (
-          <a href={`#s${s.number}`}><span class="num">{s.number}</span> {s.name}</a>
-        ))}
-        <div class="nav-divider"></div>
-        <a href="#t2"><span class="num">II</span> For SaaS products going agent-ready</a>
-        {trackIIServices.map((s) => (
-          <a href={`#s${s.number}`}><span class="num">{s.number}</span> {s.name}</a>
-        ))}
-        <div class="nav-divider"></div>
-        <a href="#t3"><span class="num">III</span> For small businesses</a>
-        {trackIIIServices.map((s) => (
-          <a href={`#s${s.number}`}><span class="num">{s.number}</span> {s.name}</a>
-        ))}
-      </nav>
-    </section>
+        <aside class="hero-aside surface-card" data-reveal>
+          <div class="aside-kicker">Recommended default</div>
+          <h2>{entryService.name}</h2>
+          <p class="aside-body">
+            One week inside the workflow, enough to classify where agents help, where
+            they do not, and what should happen first.
+          </p>
 
-    <!-- ═══ ENTRY POINT ═══ -->
-    <section class="entry-section" id="assess">
-      <div class="container">
-        <ServiceCard service={entryService} />
+          {servicesCta.details && (
+            <dl class="aside-details">
+              {servicesCta.details.map((detail) => (
+                <div class="aside-detail">
+                  <dt>{detail.label}</dt>
+                  <dd>{detail.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+
+          <a class="btn btn-soft" href="#assess">Read the assessment</a>
+        </aside>
       </div>
     </section>
 
-    <!-- ═══ TRACK I ═══ -->
-    <div class="container" id="t1">
-      <TrackHeader
-        label={tracks.I.label}
-        title={tracks.I.title}
-        description={tracks.I.description}
-      />
-      {trackIServices.map((s) => (
-        <ServiceCard service={s} />
-      ))}
-    </div>
+    <section class="pathways" id="start-here">
+      <div class="container">
+        <div class="pathways-header" data-reveal>
+          <div class="section-label">Choose the closest path</div>
+          <h2>You should know where to start before you meet every service.</h2>
+          <p>
+            The assessment is the default path for uncertainty. The three tracks below
+            are for visitors who already recognize their situation.
+          </p>
+        </div>
 
-    <!-- ═══ TRACK II ═══ -->
-    <div class="container" id="t2">
-      <TrackHeader
-        label={tracks.II.label}
-        title={tracks.II.title}
-        description={tracks.II.description}
-      />
-      {trackIIServices.map((s) => (
-        <ServiceCard service={s} />
-      ))}
-    </div>
+        <div class="pathways-grid">
+          {servicePathways.map((pathway, index) => (
+            <article
+              class:list={[
+                "pathway-card",
+                "surface-card",
+                index === 0 && "pathway-card-featured",
+              ]}
+              data-reveal
+            >
+              <div class="pathway-label">{pathway.label}</div>
+              <h3>{pathway.title}</h3>
+              <p>{pathway.body}</p>
+              <a class="pathway-link" href={pathway.href}>
+                {pathway.ctaLabel}
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
 
-    <!-- ═══ TRACK III ═══ -->
-    <section class="lab-section" id="t3">
+    <section class="entry-section" id="assess">
+      <div class="container">
+        <div class="entry-intro" data-reveal>
+          <div class="section-label">Recommended first step</div>
+          <h2>Start here when the bottleneck is clear but the right engagement is not.</h2>
+          <p>
+            The readiness assessment narrows the field before you commit to a larger
+            build, a platform effort, or a workflow package.
+          </p>
+        </div>
+
+        <ServiceCard service={entryService} featured />
+      </div>
+    </section>
+
+    <section class="track-section" id="t1">
+      <div class="container">
+        <TrackHeader
+          label={tracks.I.label}
+          title={tracks.I.title}
+          description={tracks.I.description}
+        />
+
+        <div class="track-jumps" data-reveal>
+          {trackIServices.map((service) => (
+            <a href={`#s${service.number}`}>
+              <span>{service.number}</span>
+              {service.name}
+            </a>
+          ))}
+        </div>
+
+        {trackIServices.map((service) => (
+          <ServiceCard service={service} />
+        ))}
+      </div>
+    </section>
+
+    <section class="track-section track-section-alt" id="t2">
+      <div class="container">
+        <TrackHeader
+          label={tracks.II.label}
+          title={tracks.II.title}
+          description={tracks.II.description}
+        />
+
+        <div class="track-jumps" data-reveal>
+          {trackIIServices.map((service) => (
+            <a href={`#s${service.number}`}>
+              <span>{service.number}</span>
+              {service.name}
+            </a>
+          ))}
+        </div>
+
+        {trackIIServices.map((service) => (
+          <ServiceCard service={service} />
+        ))}
+      </div>
+    </section>
+
+    <section class="decision-band">
+      <div class="container">
+        <div class="decision-band-card surface-card" data-reveal>
+          <div>
+            <div class="section-label">Still choosing?</div>
+            <h2>If you can name the drag but not the track, that is a readiness problem.</h2>
+            <p>
+              Start with the assessment and we will reduce the decision to a concrete
+              workflow, a sequence, and an honest recommendation.
+            </p>
+          </div>
+
+          <a class="btn btn-primary" href={servicesCta.primary.href}>
+            {servicesCta.primary.label}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="track-section track-section-cool" id="t3">
       <div class="container">
         <TrackHeader
           label={tracks.III.label}
           title={tracks.III.title}
           description={tracks.III.description}
         />
-        {trackIIIServices.map((s) => (
-          <ServiceCard service={s} />
+
+        <div class="track-jumps" data-reveal>
+          {trackIIIServices.map((service) => (
+            <a href={`#s${service.number}`}>
+              <span>{service.number}</span>
+              {service.name}
+            </a>
+          ))}
+        </div>
+
+        {trackIIIServices.map((service) => (
+          <ServiceCard service={service} />
         ))}
       </div>
     </section>
 
-    <!-- ═══ CTA ═══ -->
     <CTA
-      heading="Not sure where to start?"
-      body="The Agentic Readiness Assessment exists precisely for that. One week, clear findings, honest recommendations."
+      kicker={servicesCta.kicker}
+      heading={servicesCta.heading}
+      body={servicesCta.body}
+      primary={servicesCta.primary}
+      secondary={servicesCta.secondary}
+      details={servicesCta.details}
     />
-
   </main>
 
   <Footer />
-
 </Layout>
 
 <style>
   .container {
-    max-width: 760px;
+    max-width: 76rem;
     margin: 0 auto;
     padding: 0 2rem;
   }
 
-  /* ═══ COVER ═══ */
-  .cover {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 4rem 2rem;
-    position: relative;
-  }
-  .cover::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 25% 45%, rgba(139,69,19,0.03) 0%, transparent 60%),
-      radial-gradient(ellipse at 75% 55%, rgba(139,69,19,0.02) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .cover-orn {
-    width: 60px;
-    height: 1px;
-    background: var(--color-accent);
-    margin: 0 auto 2.5rem;
-    position: relative;
-    opacity: 0;
-    animation: fadeIn 1s 0.3s forwards;
-  }
-  .cover-orn::before,
-  .cover-orn::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    border: 1px solid var(--color-accent);
-    border-radius: 50%;
-    top: -3px;
-  }
-  .cover-orn::before { left: -10px; }
-  .cover-orn::after { right: -10px; }
-  .cover-kick {
+  .section-label {
     font-family: var(--font-mono);
     font-size: 0.58rem;
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-accent);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeIn 1s 0.5s forwards;
+    margin-bottom: 0.85rem;
   }
-  .cover-title {
-    font-family: var(--font-serif);
-    font-weight: 300;
-    font-size: clamp(3rem, 6.5vw, 5.5rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.4em;
-    opacity: 0;
-    animation: fadeIn 1.2s 0.3s forwards;
+
+  .services-hero {
+    padding: 8.5rem 0 4rem;
   }
-  .cover-title em {
-    font-style: italic;
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.95fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .hero-kicker,
+  .aside-kicker,
+  .pathway-label {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
     font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero-kicker,
+  .pathway-label {
     color: var(--color-accent);
   }
-  .cover-sub {
+
+  .hero-copy h1 {
     font-family: var(--font-serif);
+    font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 300;
-    font-style: italic;
-    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
-    color: var(--color-text-muted);
-    max-width: 520px;
-    margin: 0 auto;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.4rem;
+    max-width: 12ch;
+  }
+
+  .hero-body {
+    max-width: 40rem;
+    font-family: var(--font-serif);
+    font-size: 1.16rem;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .hero-aside {
+    padding: 1.5rem;
+    border-color: rgba(139, 69, 19, 0.16);
+    box-shadow: 0 20px 50px rgba(26, 26, 26, 0.08);
+  }
+
+  .aside-kicker {
+    color: var(--color-text-faint);
+    margin-bottom: 0.7rem;
+  }
+
+  .hero-aside h2 {
+    font-family: var(--font-serif);
+    font-size: 1.7rem;
+    font-weight: 500;
+    line-height: 1.15;
+    margin-bottom: 0.7rem;
+  }
+
+  .aside-body {
+    font-family: var(--font-serif);
+    font-size: 1rem;
     line-height: 1.7;
-    opacity: 0;
-    animation: fadeIn 1.2s 0.45s forwards;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.3rem;
   }
 
-  /* ═══ ANCHOR NAV ═══ */
-  .cover-nav {
-    margin-top: 3.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: center;
-    opacity: 0;
-    animation: fadeIn 1s 0.6s forwards;
+  .aside-details {
+    display: grid;
+    gap: 0.9rem;
+    margin-bottom: 1.4rem;
   }
-  .cover-nav a {
+
+  .aside-detail dt {
     font-family: var(--font-mono);
     font-size: 0.58rem;
+    font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-text-muted);
-    border-bottom: none;
-    transition: color 0.3s, padding-left 0.3s;
-    padding: 0.2rem 0;
+    color: var(--color-accent);
+    margin-bottom: 0.2rem;
   }
-  .cover-nav a:hover {
+
+  .aside-detail dd {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+
+  .pathways {
+    padding: 1rem 0 5rem;
+  }
+
+  .pathways-header {
+    max-width: 46rem;
+    margin-bottom: 2rem;
+  }
+
+  .pathways-header h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    font-weight: 400;
+    line-height: 1.12;
+    margin-bottom: 0.8rem;
+  }
+
+  .pathways-header p {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .pathways-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .pathway-card {
+    padding: 1.35rem;
+  }
+
+  .pathway-card-featured {
+    background: linear-gradient(180deg, rgba(139, 69, 19, 0.08), rgba(255, 251, 245, 0.96));
+    border-color: rgba(139, 69, 19, 0.24);
+  }
+
+  .pathway-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0.6rem 0 0.8rem;
+  }
+
+  .pathway-card p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .pathway-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--color-accent);
     border-bottom: none;
-    padding-left: 0.5rem;
-  }
-  .cover-nav .num {
-    color: var(--color-accent-light);
-    margin-right: 0.5em;
-    font-weight: 500;
-    display: inline-block;
-    min-width: 1.8em;
-  }
-  .nav-divider {
-    width: 30px;
-    height: 1px;
-    background: var(--color-border);
-    margin: 0.6rem 0;
   }
 
-  /* ═══ ENTRY SECTION ═══ */
+  .pathway-link::after {
+    content: "\2192";
+  }
+
+  .entry-section,
+  .track-section,
+  .decision-band {
+    padding: 5rem 0;
+  }
+
   .entry-section {
-    background: var(--color-bg-warm);
-    padding: 5rem 0;
-  }
-  .entry-section .container {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 2rem;
+    background: linear-gradient(180deg, rgba(139, 69, 19, 0.06), rgba(255, 251, 245, 0.7));
   }
 
-  /* ═══ LAB SECTION ═══ */
-  .lab-section {
+  .entry-intro {
+    max-width: 44rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .entry-intro h2,
+  .decision-band-card h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3vw, 2.7rem);
+    font-weight: 400;
+    line-height: 1.12;
+    margin-bottom: 0.8rem;
+  }
+
+  .entry-intro p,
+  .decision-band-card p {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .track-section-alt {
+    background: rgba(26, 26, 26, 0.03);
+  }
+
+  .track-section-cool {
     background: var(--color-bg-cool);
-    padding: 5rem 0;
-  }
-  .lab-section .container {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 2rem;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+  .track-jumps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
   }
 
-  @media (max-width: 768px) {
-    .container { padding: 0 1.25rem; }
-    .cover-nav {
+  .track-jumps a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.55rem 0.8rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(26, 26, 26, 0.08);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    border-bottom: none;
+  }
+
+  .track-jumps span {
+    color: var(--color-accent);
+  }
+
+  .decision-band {
+    padding-top: 0;
+  }
+
+  .decision-band-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.6rem;
+    border-color: rgba(139, 69, 19, 0.18);
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid,
+    .pathways-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-copy h1 {
+      max-width: none;
+    }
+
+    .decision-band-card {
+      flex-direction: column;
       align-items: flex-start;
-      padding: 0 1.5rem;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .container {
+      padding: 0 1.25rem;
+    }
+
+    .services-hero {
+      padding: 7rem 0 3rem;
+    }
+
+    .entry-section,
+    .track-section,
+    .decision-band {
+      padding: 4rem 0;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .track-jumps {
+      justify-content: flex-start;
+    }
+
+    .track-jumps a {
+      width: 100%;
+      justify-content: space-between;
     }
   }
 </style>

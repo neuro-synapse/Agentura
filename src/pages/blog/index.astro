@@ -2,35 +2,79 @@
 import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
-import SectionHeader from "../../components/SectionHeader.astro";
 import BlogPostCard from "../../components/BlogPostCard.astro";
-import CTA from "../../components/CTA.astro";
 import { getCollection } from "astro:content";
+import { routeCtas } from "../../data/site";
 
 const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const blogCta = routeCtas.blog;
 ---
 
-<Layout title="Blog — Agentura" description="Ideas on building agentic systems that do real work.">
-
+<Layout
+  title="Blog — Agentura"
+  description="Ideas on building agentic systems that do real work."
+>
   <Nav />
 
   <main>
-
     <section class="blog-hero">
-      <div class="container">
-        <div class="blog-label">
-          <span class="label-dot"></span>
-          <span class="label-text">From the workshop</span>
+      <div class="container hero-grid">
+        <div class="hero-copy" data-reveal>
+          <div class="blog-label">
+            <span class="label-dot"></span>
+            <span class="label-text">From the workshop</span>
+          </div>
+
+          <h1>Blog</h1>
+          <p class="blog-intro">
+            Observations on building agentic systems: what works, what fails, and why
+            the harness matters more than the model.
+          </p>
+
+          <div class="archive-meta">
+            <div class="meta-card">
+              <span>Archive</span>
+              <strong>{posts.length} essays</strong>
+            </div>
+            <div class="meta-card">
+              <span>Use it for</span>
+              <strong>Diagnosis before implementation</strong>
+            </div>
+          </div>
         </div>
-        <h1>Blog</h1>
-        <p class="blog-intro">Observations on building agentic systems — what works, what doesn't, and why the harness matters more than the model.</p>
+
+        <aside class="hero-aside surface-card" data-reveal>
+          <div class="aside-kicker">{blogCta.kicker}</div>
+          <h2>{blogCta.heading}</h2>
+          <p>{blogCta.body}</p>
+
+          <div class="aside-actions">
+            <a class="btn btn-primary" href={blogCta.primary.href}>
+              {blogCta.primary.label}
+            </a>
+            {blogCta.secondary && (
+              <a class="btn btn-secondary" href={blogCta.secondary.href}>
+                {blogCta.secondary.label}
+              </a>
+            )}
+          </div>
+        </aside>
       </div>
     </section>
 
-    <section class="section">
+    <section class="archive-section">
       <div class="container">
+        <div class="archive-header" data-reveal>
+          <div class="archive-kicker">Newest first</div>
+          <p>
+            Read for orientation, then move to services when you are ready to pressure-test
+            a real workflow.
+          </p>
+        </div>
+
         <div class="posts-grid" data-stagger="0.1">
           {posts.map((post) => (
             <BlogPostCard
@@ -44,13 +88,9 @@ const posts = (await getCollection("blog")).sort(
         </div>
       </div>
     </section>
-
-    <CTA />
-
   </main>
 
   <Footer />
-
 </Layout>
 
 <style>
@@ -59,15 +99,25 @@ const posts = (await getCollection("blog")).sort(
     margin: 0 auto;
     padding: 0 2rem;
   }
+
   .blog-hero {
-    padding: 10rem 0 4rem;
+    padding: 8.5rem 0 3.5rem;
   }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(19rem, 0.9fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
   .blog-label {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.8rem;
   }
+
   .label-dot {
     width: 8px;
     height: 8px;
@@ -75,52 +125,164 @@ const posts = (await getCollection("blog")).sort(
     border-radius: 50%;
     animation: pulse 2s ease-in-out infinite;
   }
+
   @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.4;
+    }
   }
-  .label-text {
+
+  .label-text,
+  .aside-kicker,
+  .archive-kicker {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.62rem;
     font-weight: 500;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-text-secondary);
   }
-  .blog-hero h1 {
+
+  .label-text,
+  .archive-kicker {
+    color: var(--color-accent);
+  }
+
+  .hero-copy h1 {
     font-family: var(--font-serif);
-    font-size: clamp(3.2rem, 6vw, 5rem);
+    font-size: clamp(3rem, 6vw, 4.8rem);
     font-weight: 300;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.4rem;
   }
+
   .blog-intro {
+    max-width: 40rem;
     font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 1.15rem;
+    font-size: 1.12rem;
+    line-height: 1.8;
     color: var(--color-text-secondary);
-    max-width: 600px;
+  }
+
+  .archive-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .meta-card {
+    min-width: 14rem;
+    padding: 1rem 1.1rem;
+    border-radius: 12px;
+    background: rgba(26, 26, 26, 0.03);
+    border: 1px solid var(--color-border-light);
+  }
+
+  .meta-card span {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    margin-bottom: 0.4rem;
+  }
+
+  .meta-card strong {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+
+  .hero-aside {
+    padding: 1.5rem;
+    border-color: rgba(139, 69, 19, 0.16);
+  }
+
+  .aside-kicker {
+    color: var(--color-text-faint);
+    margin-bottom: 0.7rem;
+  }
+
+  .hero-aside h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-aside p,
+  .archive-header p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
     line-height: 1.7;
-    padding-bottom: 3rem;
-    background-image: linear-gradient(90deg, var(--color-accent), var(--color-accent-light), transparent);
-    background-size: 200px 1px;
-    background-position: bottom left;
-    background-repeat: no-repeat;
+    color: var(--color-text-secondary);
   }
-  .section {
-    padding: var(--space-xl) 0;
+
+  .aside-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1.75rem;
   }
+
+  .archive-section {
+    padding: 1rem 0 5rem;
+  }
+
+  .archive-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .archive-header p {
+    max-width: 34rem;
+  }
+
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     gap: 1.5rem;
   }
 
+  @media (max-width: 900px) {
+    .hero-grid,
+    .archive-header {
+      grid-template-columns: 1fr;
+      display: grid;
+    }
+  }
+
   @media (max-width: 768px) {
-    .blog-hero { padding: 7rem 0 3rem; }
-    .container { padding: 0 1.5rem; }
-    .posts-grid { grid-template-columns: 1fr; }
+    .blog-hero {
+      padding: 7rem 0 2.5rem;
+    }
+
+    .container {
+      padding: 0 1.25rem;
+    }
+
+    .aside-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

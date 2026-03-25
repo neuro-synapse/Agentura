@@ -4,7 +4,10 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Agentura — We design, build, and operationalize agentic systems that compound in value over time." } = Astro.props;
+const {
+  title,
+  description = "Agentura — We design, build, and operationalize agentic systems that compound in value over time.",
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -13,16 +16,30 @@ const { title, description = "Agentura — We design, build, and operationalize 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#1A1A1A" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <title>{title}</title>
   </head>
   <body>
     <slot />
     <script>
-      // Scroll-reveal with stagger support
+      const revealTargets = [...document.querySelectorAll("[data-reveal]")];
+
+      revealTargets.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.92) {
+          el.classList.add("visible");
+        }
+      });
+
+      document.documentElement.classList.add("reveal-ready");
+
       const revealObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -31,19 +48,19 @@ const { title, description = "Agentura — We design, build, and operationalize 
               if (delay) {
                 entry.target.style.transitionDelay = delay;
               }
-              entry.target.classList.add('visible');
+              entry.target.classList.add("visible");
             }
           });
         },
-        { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+        { threshold: 0.08, rootMargin: "0px 0px -30px 0px" },
       );
-      document.querySelectorAll('[data-reveal]').forEach((el) => {
+
+      revealTargets.forEach((el) => {
         revealObserver.observe(el);
       });
 
-      // Auto-stagger sibling [data-stagger] children
-      document.querySelectorAll('[data-stagger]').forEach((parent) => {
-        const children = parent.querySelectorAll(':scope > [data-reveal]');
+      document.querySelectorAll("[data-stagger]").forEach((parent) => {
+        const children = parent.querySelectorAll(":scope > [data-reveal]");
         const base = parseFloat(parent.dataset.stagger) || 0.08;
         children.forEach((child, i) => {
           child.dataset.revealDelay = `${(i * base).toFixed(2)}s`;
@@ -55,25 +72,27 @@ const { title, description = "Agentura — We design, build, and operationalize 
 
 <style is:global>
   :root {
-    --color-bg: #FAF8F5;
-    --color-bg-warm: #F3EFE8;
-    --color-bg-cool: #EEF1F5;
-    --color-surface: #FFFFFF;
-    --color-border: #D4CDC4;
-    --color-border-light: #E8E2DA;
-    --color-border-strong: #1A1A1A;
-    --color-text: #1A1A1A;
-    --color-text-secondary: #4A4A4A;
-    --color-text-muted: #7A7A7A;
-    --color-text-faint: #B8B8B8;
-    --color-accent: #8B4513;
-    --color-accent-light: #C4956A;
+    --color-bg: #faf8f5;
+    --color-bg-warm: #f3efe8;
+    --color-bg-cool: #eef1f5;
+    --color-surface: #ffffff;
+    --color-surface-tinted: #f8f2e9;
+    --color-border: #d4cdc4;
+    --color-border-light: #e8e2da;
+    --color-border-strong: #1a1a1a;
+    --color-text: #1a1a1a;
+    --color-text-secondary: #4a4a4a;
+    --color-text-muted: #6c645c;
+    --color-text-faint: #a89f95;
+    --color-accent: #8b4513;
+    --color-accent-strong: #6f3410;
+    --color-accent-light: #c4956a;
     --color-accent-faint: rgba(139, 69, 19, 0.05);
-    --color-highlight: #C4956A;
+    --color-highlight: #c4956a;
 
-    --font-serif: 'Cormorant Garamond', Georgia, serif;
-    --font-sans: 'DM Sans', -apple-system, sans-serif;
-    --font-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+    --font-serif: "Cormorant Garamond", Georgia, serif;
+    --font-sans: "DM Sans", -apple-system, sans-serif;
+    --font-mono: "IBM Plex Mono", "SF Mono", monospace;
 
     --space-xs: 0.5rem;
     --space-sm: 1rem;
@@ -108,10 +127,10 @@ const { title, description = "Agentura — We design, build, and operationalize 
     line-height: 1.65;
   }
   body::before {
-    content: '';
+    content: "";
     position: fixed;
     inset: 0;
-    opacity: 0.03;
+    opacity: 0.02;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 9999;
@@ -122,7 +141,6 @@ const { title, description = "Agentura — We design, build, and operationalize 
     color: white;
   }
 
-  /* ── Label tokens ── */
   .label {
     font-family: var(--font-mono);
     font-size: 0.68rem;
@@ -138,7 +156,73 @@ const { title, description = "Agentura — We design, build, and operationalize 
     text-transform: uppercase;
   }
 
-  /* ── Focus states ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.95rem 1.4rem;
+    border-radius: 999px;
+    border-bottom: none;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s,
+      background 0.2s,
+      color 0.2s;
+  }
+  .btn:hover {
+    border-bottom: none;
+    transform: translateY(-1px);
+  }
+  .btn-primary {
+    background: var(--color-accent);
+    color: white !important;
+    box-shadow: 0 8px 20px rgba(139, 69, 19, 0.16);
+  }
+  .btn-primary:hover {
+    background: var(--color-accent-strong);
+  }
+  .btn-secondary {
+    background: white;
+    color: var(--color-text) !important;
+  }
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.92);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-text) !important;
+    box-shadow: inset 0 0 0 1.5px var(--color-border-strong);
+  }
+  .btn-ghost:hover {
+    color: var(--color-accent) !important;
+    box-shadow: inset 0 0 0 1.5px var(--color-accent);
+  }
+  .btn-soft {
+    background: var(--color-surface);
+    color: var(--color-text) !important;
+    box-shadow: inset 0 0 0 1px var(--color-border);
+  }
+  .btn-soft:hover {
+    box-shadow: inset 0 0 0 1px var(--color-accent);
+  }
+  .btn-large {
+    font-size: 0.82rem;
+    padding: 1rem 1.55rem;
+  }
+
+  .surface-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(26, 26, 26, 0.04);
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
@@ -159,14 +243,27 @@ const { title, description = "Agentura — We design, build, and operationalize 
     display: block;
   }
 
-  /* Scroll-reveal — snappy, not sluggish */
-  [data-reveal] {
+  .reveal-ready [data-reveal] {
     opacity: 0;
     transform: translateY(12px);
-    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition:
+      opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  [data-reveal].visible {
+  .reveal-ready [data-reveal].visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .reveal-ready [data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 </style>

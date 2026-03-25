@@ -1,53 +1,89 @@
 ---
+import { siteLinks } from "../data/site";
+
 const pathname = Astro.url.pathname;
 
 const links = [
-  { href: '/tao', label: 'Principles' },
-  { href: '/services', label: 'Services' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/#process', label: 'Process' },
-  { href: '/#contact', label: 'Contact' },
+  { href: "/tao", label: "Principles" },
+  { href: "/services", label: "Services" },
+  { href: "/blog", label: "Blog" },
+  { href: "/#process", label: "Process" },
+  { href: "/#contact", label: "Contact" },
 ];
 ---
 
 <nav class="nav">
   <div class="nav-inner">
     <a href="/" class="wordmark">Agentura</a>
+    <a href={siteLinks.startHere} class="nav-cta-mobile">Start here</a>
     <div class="nav-links" id="nav-links">
       {links.map(({ href, label }) => (
         <a
           href={href}
-          class:list={[{ active: pathname === href || (href !== '/' && pathname.startsWith(href)) }]}
+          class:list={[{ active: pathname === href || (href !== "/" && pathname.startsWith(href)) }]}
         >
           {label}
         </a>
       ))}
-      <a href="mailto:hello@agentura.dev" class="nav-cta">Talk to us</a>
+      <a href={siteLinks.conversation} class="nav-cta">Talk to us</a>
     </div>
-    <button class="menu-toggle" aria-label="Toggle menu" id="menu-toggle">
+    <button
+      class="menu-toggle"
+      aria-label="Toggle menu"
+      aria-controls="nav-links"
+      aria-expanded="false"
+      id="menu-toggle"
+    >
       <span></span><span></span>
     </button>
   </div>
 </nav>
 
 <script>
-  const toggle = document.getElementById('menu-toggle');
-  const links = document.getElementById('nav-links');
+  const toggle = document.getElementById("menu-toggle");
+  const links = document.getElementById("nav-links");
+
   if (toggle && links) {
-    toggle.addEventListener('click', () => {
-      const isOpen = links.classList.toggle('open');
-      toggle.classList.toggle('open', isOpen);
-      toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.addEventListener("click", () => {
+      const isOpen = links.classList.toggle("open");
+      toggle.classList.toggle("open", isOpen);
+      toggle.setAttribute("aria-expanded", String(isOpen));
     });
-    // Close menu when clicking a link
-    links.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => {
-        links.classList.remove('open');
-        toggle.classList.remove('open');
+
+    links.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => {
+        links.classList.remove("open");
+        toggle.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
       });
     });
   }
 </script>
+
+<noscript>
+  <style>
+    @media (max-width: 768px) {
+      .nav-inner {
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        display: flex !important;
+        position: static !important;
+        width: 100%;
+        padding: 1rem 0 0;
+        margin-top: 0.9rem;
+        border-top: 1px solid #d4cdc4;
+        flex-direction: column;
+        align-items: flex-start !important;
+      }
+
+      .menu-toggle {
+        display: none !important;
+      }
+    }
+  </style>
+</noscript>
 
 <style>
   .nav {
@@ -63,10 +99,12 @@ const links = [
   .nav-inner {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 1.1rem 2rem;
+    padding: 1.05rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+    position: relative;
   }
   .wordmark {
     font-family: var(--font-serif);
@@ -79,9 +117,26 @@ const links = [
   .wordmark:hover {
     border-bottom: none;
   }
+  .nav-cta-mobile {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-bg) !important;
+    background: var(--color-text);
+    border-radius: 999px;
+    padding: 0.65rem 0.95rem;
+    border-bottom: none;
+  }
+  .nav-cta-mobile:hover {
+    background: var(--color-accent);
+    border-bottom: none;
+  }
   .nav-links {
     display: flex;
-    gap: 2.5rem;
+    gap: 2.25rem;
     align-items: center;
   }
   .nav-links a {
@@ -96,7 +151,7 @@ const links = [
     position: relative;
   }
   .nav-links a::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -4px;
     left: 0;
@@ -123,8 +178,8 @@ const links = [
   .nav-cta {
     background: var(--color-text);
     color: var(--color-bg) !important;
-    padding: 0.55rem 1.3rem;
-    border-radius: 4px;
+    padding: 0.58rem 1.2rem;
+    border-radius: 999px;
     transition: background 0.2s;
   }
   .nav-cta::after {
@@ -157,24 +212,38 @@ const links = [
   }
 
   @media (max-width: 768px) {
+    .nav-inner {
+      padding: 0.95rem 1.5rem;
+    }
+    .nav-cta-mobile {
+      display: inline-flex;
+      margin-left: auto;
+    }
     .nav-links {
-      display: none;
       position: absolute;
-      top: 100%;
+      top: calc(100% + 1px);
       left: 0;
       right: 0;
       background: rgba(250, 248, 245, 0.98);
       backdrop-filter: blur(12px);
       flex-direction: column;
-      padding: 1.5rem 2rem 2rem;
-      gap: 1.25rem;
+      align-items: stretch;
+      padding: 1.25rem 1.5rem 1.5rem;
+      gap: 1rem;
       border-bottom: 1px solid var(--color-border);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    }
+    .nav-links {
+      display: none;
     }
     .nav-links.open {
       display: flex;
     }
     .menu-toggle {
       display: flex;
+    }
+    .nav-links .nav-cta {
+      text-align: center;
     }
   }
 </style>

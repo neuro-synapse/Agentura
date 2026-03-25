@@ -4,61 +4,91 @@ import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import PrincipleCard from "../components/PrincipleCard.astro";
 import { principles, sectionLabels } from "../data/principles";
+import { routeCtas } from "../data/site";
 
-const sections = ['intent', 'method', 'culture'] as const;
+const sections = ["intent", "method", "culture"] as const;
+const taoCta = routeCtas.tao;
 ---
 
-<Layout title="The Tao of Agentura — Fifteen Principles">
-
+<Layout
+  title="The Tao of Agentura — Fifteen Principles"
+  description="The working principles behind Agentura's approach to agentic systems."
+>
   <Nav />
 
   <main>
+    <section class="manifesto-hero">
+      <div class="container manifesto-grid">
+        <div class="manifesto-copy" data-reveal>
+          <div class="manifesto-kicker">Manifesto</div>
+          <h1>The Tao of Agentura</h1>
+          <p class="manifesto-intro">
+            Fifteen principles about intent, method, and culture. This is the document
+            underneath the services page: how we decide what to automate, how we keep
+            agents aligned with reality, and what kind of work we refuse to romanticize.
+          </p>
 
-    <!-- ═══ COVER ═══ -->
-    <section class="cover">
-      <div class="cover-ornament"></div>
-      <div class="cover-kicker">A Foundation Document</div>
-      <h1 class="cover-title">The Tao of <em>Agentura</em></h1>
-      <p class="cover-subtitle">
-        A foundation for how we think, what we build,<br />
-        and how we work with clients.
-      </p>
-      <div class="cover-rule"></div>
-      <div class="cover-count">Fifteen Principles</div>
+          <div class="manifesto-actions">
+            <a class="btn btn-secondary" href="#principles-start">Read the principles</a>
+            <a class="btn btn-ghost" href="/blog">Read the essays</a>
+          </div>
+        </div>
+
+        <aside class="manifesto-aside surface-card" data-reveal>
+          <div class="manifesto-aside-kicker">{taoCta.kicker}</div>
+          <h2>{taoCta.heading}</h2>
+          <p>{taoCta.body}</p>
+
+          <div class="manifesto-aside-actions">
+            <a class="btn btn-primary" href={taoCta.primary.href}>
+              {taoCta.primary.label}
+            </a>
+            {taoCta.secondary && (
+              <a class="btn btn-secondary" href={taoCta.secondary.href}>
+                {taoCta.secondary.label}
+              </a>
+            )}
+          </div>
+        </aside>
+      </div>
     </section>
 
-    <!-- ═══ PRINCIPLES ═══ -->
-    <div class="principles">
-      {sections.map((section, si) => (
-        <>
-          <div class="section-break" data-reveal>
-            <span class="section-break-dot"></span>
-            <span class="section-break-dot"></span>
-            <span class="section-break-dot"></span>
-            {si === 0 ? null : null}
-          </div>
+    <section class="reading-note">
+      <div class="container reading-note-inner" data-reveal>
+        <div class="section-label">How to use this page</div>
+        <p>
+          The principles are grouped in the order they matter in practice: clarify
+          intent, build the harness, then shape the culture around visible reasoning
+          and compound learning.
+        </p>
+      </div>
+    </section>
 
-          <div class="section-label" data-reveal>
-            <span class="section-label-text">{sectionLabels[section]}</span>
+    <div class="principles" id="principles-start">
+      {sections.map((section) => (
+        <section class="principle-section">
+          <div class="section-head" data-reveal>
+            <span class="section-rule"></span>
+            <span class="section-name">{sectionLabels[section]}</span>
+            <span class="section-rule"></span>
           </div>
 
           {principles
-            .filter((p) => p.section === section)
-            .map((p) => (
+            .filter((principle) => principle.section === section)
+            .map((principle) => (
               <div data-reveal>
                 <PrincipleCard
-                  number={p.number}
-                  title={p.title}
-                  body={p.body}
+                  number={principle.number}
+                  title={principle.title}
+                  body={principle.body}
                   variant="full"
                 />
               </div>
             ))}
-        </>
+        </section>
       ))}
     </div>
 
-    <!-- ═══ COLOPHON ═══ -->
     <section class="colophon" data-reveal>
       <div class="colophon-rule"></div>
       <p class="colophon-text">
@@ -69,199 +99,190 @@ const sections = ['intent', 'method', 'culture'] as const;
       </p>
       <div class="colophon-sig">Agentura &middot; March 2026</div>
     </section>
-
   </main>
 
   <Footer />
-
 </Layout>
 
 <style>
-  /* ═══ COVER ═══ */
-  .cover {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 4rem 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .cover::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background:
-      radial-gradient(ellipse at 20% 50%, rgba(139,69,19,0.03) 0%, transparent 70%),
-      radial-gradient(ellipse at 80% 50%, rgba(139,69,19,0.02) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .cover-ornament {
-    width: 60px;
-    height: 1px;
-    background: var(--color-accent);
-    margin: 0 auto 3rem;
-    position: relative;
-    opacity: 0;
-    animation: fadeIn 1.2s ease 0.3s forwards;
-  }
-  .cover-ornament::before,
-  .cover-ornament::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    border: 1px solid var(--color-accent);
-    border-radius: 50%;
-    top: -3px;
-  }
-  .cover-ornament::before { left: -10px; }
-  .cover-ornament::after { right: -10px; }
-  .cover-kicker {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeIn 1s ease 0.6s forwards;
-  }
-  .cover-title {
-    font-family: var(--font-serif);
-    font-weight: 300;
-    font-size: clamp(3.2rem, 7vw, 6rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.3em;
-    opacity: 0;
-    animation: fadeIn 1.2s ease 0.35s forwards;
-  }
-  .cover-title em {
-    font-style: italic;
-    font-weight: 500;
-    color: var(--color-accent);
-  }
-  .cover-subtitle {
-    font-family: var(--font-serif);
-    font-weight: 300;
-    font-style: italic;
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    color: var(--color-text-muted);
-    max-width: 480px;
-    margin: 0 auto;
-    line-height: 1.6;
-    opacity: 0;
-    animation: fadeIn 1.2s ease 0.45s forwards;
-  }
-  .cover-rule {
-    width: 40px;
-    height: 1px;
-    background: var(--color-border);
-    margin: 3rem auto 0;
-    opacity: 0;
-    animation: fadeIn 1s ease 0.55s forwards;
-  }
-  .cover-count {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    margin-top: 1rem;
-    opacity: 0;
-    animation: fadeIn 1s ease 0.6s forwards;
-  }
-
-  /* ═══ PRINCIPLES ═══ */
-  .principles {
-    max-width: var(--max-width-narrow);
+  .container {
+    max-width: 76rem;
     margin: 0 auto;
     padding: 0 2rem;
   }
 
-  /* ═══ SECTION BREAKS ═══ */
-  .section-break {
-    text-align: center;
-    padding: 4rem 0 1rem;
+  .manifesto-hero {
+    padding: 8.5rem 0 3.5rem;
   }
-  .section-break-dot {
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--color-accent-light);
-    margin: 0 8px;
+
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(19rem, 0.9fr);
+    gap: 2rem;
+    align-items: start;
   }
-  .section-label {
-    text-align: center;
-    padding-bottom: 2rem;
-  }
-  .section-label-text {
+
+  .manifesto-kicker,
+  .manifesto-aside-kicker,
+  .section-label,
+  .section-name {
     font-family: var(--font-mono);
     font-size: 0.58rem;
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-accent);
-    border: 1px solid var(--color-accent-light);
-    padding: 0.25rem 1rem;
-    border-radius: 2px;
   }
 
-  /* ═══ COLOPHON ═══ */
+  .manifesto-kicker,
+  .section-label,
+  .section-name {
+    color: var(--color-accent);
+  }
+
+  .manifesto-copy h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 5vw, 4.8rem);
+    font-weight: 300;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    margin: 0.9rem 0 1.3rem;
+  }
+
+  .manifesto-intro {
+    max-width: 42rem;
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+  }
+
+  .manifesto-actions,
+  .manifesto-aside-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 2rem;
+  }
+
+  .manifesto-aside {
+    padding: 1.5rem;
+    border-color: rgba(139, 69, 19, 0.16);
+  }
+
+  .manifesto-aside-kicker {
+    color: var(--color-text-faint);
+    margin-bottom: 0.7rem;
+  }
+
+  .manifesto-aside h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+
+  .manifesto-aside p,
+  .reading-note-inner p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .reading-note {
+    padding: 0 0 2rem;
+  }
+
+  .reading-note-inner {
+    max-width: 50rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-label {
+    margin-bottom: 0.65rem;
+  }
+
+  .principles {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 2rem 2rem;
+  }
+
+  .principle-section + .principle-section {
+    margin-top: 3rem;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+
+  .section-rule {
+    flex: 1;
+    max-width: 6rem;
+    height: 1px;
+    background: var(--color-border);
+  }
+
   .colophon {
     max-width: var(--max-width-narrow);
     margin: 0 auto;
-    padding: 6rem 2rem 8rem;
+    padding: 5rem 2rem 8rem;
     text-align: center;
   }
+
   .colophon-rule {
-    width: 60px;
+    width: 3rem;
     height: 1px;
-    background: var(--color-accent);
-    margin: 0 auto 2.5rem;
-    position: relative;
+    background: var(--color-border);
+    margin: 0 auto 2rem;
   }
-  .colophon-rule::before {
-    content: '';
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    border: 1px solid var(--color-accent);
-    border-radius: 50%;
-    top: -3px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--color-bg);
-  }
+
   .colophon-text {
     font-family: var(--font-serif);
-    font-weight: 400;
+    font-weight: 300;
     font-style: italic;
-    font-size: 1.2rem;
-    line-height: 1.7;
+    font-size: 1.1rem;
+    line-height: 1.8;
     color: var(--color-text-secondary);
-    max-width: 420px;
-    margin: 0 auto 2.5rem;
+    margin-bottom: 1rem;
   }
+
   .colophon-sig {
     font-family: var(--font-mono);
     font-size: 0.58rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--color-text-faint);
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+  @media (max-width: 900px) {
+    .manifesto-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
-  @media (max-width: 600px) {
-    .principles { padding: 0 1.25rem; }
+  @media (max-width: 720px) {
+    .container,
+    .principles,
+    .colophon {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    .manifesto-hero {
+      padding: 7rem 0 2.5rem;
+    }
+
+    .manifesto-actions,
+    .manifesto-aside-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
 </style>

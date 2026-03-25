@@ -1,69 +1,181 @@
 ---
 import type { Service } from '../data/services';
-import DetailGrid from './DetailGrid.astro';
 import TaoRef from './TaoRef.astro';
 
 interface Props {
   service: Service;
+  featured?: boolean;
 }
-const { service } = Astro.props;
+
+const { service, featured = false } = Astro.props;
+
+const detailLookup = new Map(
+  service.details.map((detail) => [detail.label.toLowerCase(), detail.value]),
+);
+
+const bestFor =
+  detailLookup.get('best for') ??
+  detailLookup.get('focus') ??
+  detailLookup.get('standalone value') ??
+  service.situation;
+
+const timing =
+  detailLookup.get('duration') ??
+  detailLookup.get('time to value') ??
+  'Scoped to the workflow and constraints in front of you';
+
+const timingLabel = detailLookup.has('duration')
+  ? 'Duration'
+  : detailLookup.has('time to value')
+    ? 'Time to value'
+    : 'Typical scope';
+
+const summarySignal = detailLookup.has('team involvement')
+  ? {
+      label: 'Team involvement',
+      value: detailLookup.get('team involvement')!,
+    }
+  : detailLookup.has('trigger moment')
+    ? {
+        label: 'Signal you are here',
+        value: detailLookup.get('trigger moment')!,
+      }
+    : detailLookup.has('who joins')
+      ? {
+          label: 'Who joins',
+          value: detailLookup.get('who joins')!,
+        }
+      : detailLookup.has('standalone value')
+        ? {
+            label: 'Standalone value',
+            value: detailLookup.get('standalone value')!,
+          }
+        : {
+            label: 'What this involves',
+            value:
+              'A working session around the actual workflow, operators, and handoffs involved.',
+          };
+
+const summaryHighlights = service.deliverables.slice(0, 3);
 ---
 
-<article class="service" data-reveal id={`s${service.number}`}>
-  <div class="s-number">Service {service.number}</div>
-  <h2 class="s-name" set:html={service.name} />
-  <p class="s-tagline">{service.tagline}</p>
-
-  <div class="s-block">
-    <div class="s-label">The situation</div>
-    <p class="s-body">{service.situation}</p>
-  </div>
-
-  <div class="s-block">
-    <div class="s-label">What we do</div>
-    {service.whatWeDo.map((p) => (
-      <p class="s-body">{p}</p>
-    ))}
-  </div>
-
-  <div class="s-block">
-    <div class="s-label">What you receive</div>
-    <ul class="del-list">
-      {service.deliverables.map(({ marker, text }) => (
-        <li>
-          <span class="del-marker">{marker}</span>
-          <span>{text}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
-
-  {service.details.length > 0 && (
-    <div class="s-block">
-      <DetailGrid items={service.details} />
+<article
+  class:list={['service', featured && 'service-featured']}
+  data-reveal
+  id={`s${service.number}`}
+>
+  <div class="service-shell surface-card">
+    <div class="service-head">
+      <div class="s-number">Service {service.number}</div>
+      <h2 class="s-name" set:html={service.name} />
+      <p class="s-tagline">{service.tagline}</p>
     </div>
-  )}
 
-  {service.taoRef && (
-    <TaoRef quote={service.taoRef.quote} principle={service.taoRef.principle} />
-  )}
+    <div class="summary-grid">
+      <div class="summary-panel">
+        <div class="summary-label">Best fit</div>
+        <p class="summary-copy">{bestFor}</p>
+      </div>
 
-  {service.connector && (
-    <div class="s-connector">
-      <div class="conn-label">What this unlocks</div>
-      <p class="conn-text">{service.connector}</p>
+      <div class="summary-panel">
+        <div class="summary-label">{timingLabel}</div>
+        <p class="summary-copy">{timing}</p>
+      </div>
+
+      <div class="summary-panel">
+        <div class="summary-label">{summarySignal.label}</div>
+        <p class="summary-copy">{summarySignal.value}</p>
+      </div>
     </div>
-  )}
+
+    <div class="summary-highlights">
+      <div class="summary-label">You leave with</div>
+      <ul class="highlight-list">
+        {summaryHighlights.map(({ marker, text }) => (
+          <li>
+            <span class="highlight-marker">{marker}</span>
+            <span>{text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {service.connector && (
+      <div class="service-connector">
+        <div class="summary-label">What this unlocks</div>
+        <p class="connector-copy">{service.connector}</p>
+      </div>
+    )}
+
+    <details class="service-depth" open={featured}>
+      <summary>
+        <span>Read the full engagement notes</span>
+        <span class="summary-icon" aria-hidden="true"></span>
+      </summary>
+
+      <div class="service-depth-content">
+        <div class="s-block">
+          <div class="s-label">The situation</div>
+          <p class="s-body">{service.situation}</p>
+        </div>
+
+        <div class="s-block">
+          <div class="s-label">What we do</div>
+          {service.whatWeDo.map((paragraph) => (
+            <p class="s-body">{paragraph}</p>
+          ))}
+        </div>
+
+        <div class="s-block">
+          <div class="s-label">Everything you receive</div>
+          <ul class="deliverable-list">
+            {service.deliverables.map(({ marker, text }) => (
+              <li>
+                <span class="deliverable-marker">{marker}</span>
+                <span>{text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {service.details.length > 0 && (
+          <div class="detail-grid">
+            {service.details.map((detail) => (
+              <div class="detail-item">
+                <div class="detail-label">{detail.label}</div>
+                <p class="detail-value">{detail.value}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {service.taoRef && (
+          <TaoRef quote={service.taoRef.quote} principle={service.taoRef.principle} />
+        )}
+      </div>
+    </details>
+  </div>
 </article>
 
 <style>
   .service {
-    padding: 4.5rem 0;
-    border-bottom: 1px solid var(--color-border-light);
+    padding: 2rem 0;
   }
-  .service:last-child {
-    border-bottom: none;
+
+  .service-shell {
+    padding: 2rem;
+    border-color: rgba(26, 26, 26, 0.1);
   }
+
+  .service-featured .service-shell {
+    border-color: rgba(139, 69, 19, 0.28);
+    box-shadow: 0 24px 60px rgba(26, 26, 26, 0.08);
+  }
+
+  .service-head {
+    margin-bottom: 1.75rem;
+  }
+
   .s-number {
     font-family: var(--font-mono);
     font-size: 0.58rem;
@@ -71,114 +183,256 @@ const { service } = Astro.props;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-accent);
-    margin-bottom: 0.7rem;
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
+    margin-bottom: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.7rem;
     border: 1px solid rgba(139, 69, 19, 0.2);
-    border-radius: 2px;
-    background: rgba(139, 69, 19, 0.03);
+    border-radius: 999px;
+    background: rgba(139, 69, 19, 0.05);
   }
+
   .s-name {
     font-family: var(--font-serif);
     font-weight: 500;
-    font-size: clamp(1.5rem, 2.8vw, 2rem);
-    line-height: 1.2;
+    font-size: clamp(1.65rem, 2.8vw, 2.3rem);
+    line-height: 1.12;
     color: var(--color-text);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
   }
+
   .s-tagline {
     font-family: var(--font-serif);
     font-weight: 300;
     font-style: italic;
-    font-size: 1.05rem;
+    font-size: 1.08rem;
     color: var(--color-text-muted);
-    margin-bottom: 2.5rem;
-    max-width: 480px;
+    max-width: 42rem;
   }
-  .s-block {
-    margin-bottom: 2.2rem;
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
   }
-  .s-label {
+
+  .summary-panel {
+    padding: 1rem 1.1rem;
+    background: var(--color-surface-tinted);
+    border: 1px solid rgba(139, 69, 19, 0.1);
+    border-radius: 12px;
+  }
+
+  .summary-label,
+  .s-label,
+  .detail-label {
     font-family: var(--font-mono);
     font-size: 0.58rem;
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-accent-light);
-    margin-bottom: 0.7rem;
-    padding-bottom: 0.35rem;
-    border-bottom: 1px solid var(--color-border-light);
-    display: inline-block;
   }
+
+  .summary-label {
+    color: var(--color-accent);
+    margin-bottom: 0.55rem;
+  }
+
+  .summary-copy {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+
+  .summary-highlights {
+    padding: 1.25rem 0 1.1rem;
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .highlight-list,
+  .deliverable-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.9rem 0 0;
+  }
+
+  .highlight-list li,
+  .deliverable-list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.85rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+
+  .highlight-list li:last-child,
+  .deliverable-list li:last-child {
+    border-bottom: none;
+  }
+
+  .highlight-marker,
+  .deliverable-marker {
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    min-width: 4.5rem;
+    padding-top: 0.25rem;
+  }
+
+  .service-connector {
+    margin-top: 0.25rem;
+    padding: 1.1rem 1.2rem;
+    border-radius: 12px;
+    background: rgba(26, 26, 26, 0.03);
+  }
+
+  .connector-copy {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+  }
+
+  .service-depth {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+  }
+
+  .service-depth summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .service-depth summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .summary-icon {
+    width: 0.8rem;
+    height: 0.8rem;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .summary-icon::before,
+  .summary-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  .summary-icon::before {
+    width: 0.8rem;
+    height: 1px;
+  }
+
+  .summary-icon::after {
+    width: 1px;
+    height: 0.8rem;
+  }
+
+  .service-depth[open] .summary-icon::after {
+    opacity: 0;
+  }
+
+  .service-depth-content {
+    padding-top: 1.4rem;
+  }
+
+  .s-block + .s-block {
+    margin-top: 2rem;
+  }
+
+  .s-label {
+    color: var(--color-accent-light);
+    margin-bottom: 0.75rem;
+  }
+
   .s-body {
     font-family: var(--font-serif);
     font-weight: 300;
     font-size: 1rem;
     line-height: 1.8;
     color: var(--color-text-secondary);
-    max-width: 600px;
+    max-width: 44rem;
   }
+
   .s-body + .s-body {
-    margin-top: 0.9rem;
+    margin-top: 0.95rem;
   }
-  .del-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 0.3rem;
+
+  .detail-grid {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1rem;
   }
-  .del-list li {
-    font-family: var(--font-serif);
-    font-weight: 300;
-    font-size: 0.95rem;
-    color: var(--color-text-secondary);
-    padding: 0.55rem 0;
-    border-bottom: 1px solid var(--color-border-light);
-    display: flex;
-    align-items: baseline;
-    gap: 0.8rem;
+
+  .detail-item {
+    padding: 1rem;
+    border-radius: 12px;
+    background: rgba(26, 26, 26, 0.03);
+    border: 1px solid var(--color-border-light);
   }
-  .del-list li:last-child {
-    border-bottom: none;
-  }
-  .del-marker {
-    font-family: var(--font-mono);
-    font-size: 0.52rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    flex-shrink: 0;
-    min-width: 56px;
-    background: rgba(139, 69, 19, 0.05);
-    border: 1px solid rgba(139, 69, 19, 0.1);
-    border-radius: 2px;
-    padding: 0.15rem 0.4rem;
-    text-align: center;
-  }
-  .s-connector {
-    margin-top: 2.2rem;
-    padding: 1.2rem 0 0;
-    border-top: 1px solid var(--color-border-light);
-  }
-  .conn-label {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+
+  .detail-label {
     color: var(--color-text-faint);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.45rem;
   }
-  .conn-text {
+
+  .detail-value {
     font-family: var(--font-serif);
     font-weight: 300;
-    font-style: italic;
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    max-width: 460px;
+    font-size: 0.96rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
   }
+
+  @media (max-width: 900px) {
+    .summary-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 600px) {
     .service {
-      padding: 3rem 0;
+      padding: 1.4rem 0;
+    }
+
+    .service-shell {
+      padding: 1.35rem;
+    }
+
+    .s-tagline {
+      font-size: 1rem;
     }
   }
 </style>

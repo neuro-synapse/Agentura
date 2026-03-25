@@ -1,28 +1,70 @@
 ---
+import type { SiteAction, SiteDetail } from "../data/site";
+
 interface Props {
+  id?: string;
+  kicker?: string;
   heading?: string;
   body?: string;
+  primary?: SiteAction;
+  secondary?: SiteAction;
+  details?: SiteDetail[];
 }
+
 const {
-  heading = "Let\u2019s find the right workflow.",
-  body = "We start every engagement with a short conversation \u2014 no pitch, no pressure. We\u2019ll ask about your team\u2019s daily work and tell you honestly whether we can help.",
+  id = "contact",
+  kicker = "Let’s find the right workflow",
+  heading = "Start with a concrete workflow, not a pitch deck.",
+  body = "We begin with the work itself: where judgment lives, where coordination drags, and where a dependable agentic layer would actually change the day-to-day.",
+  primary = {
+    label: "Start a conversation",
+    href: "mailto:hello@agentura.dev",
+    note: "Tell us the workflow you are trying to change",
+  },
+  secondary,
+  details = [],
 } = Astro.props;
 ---
 
-<section id="contact" class="section-cta">
+<section id={id} class="section-cta">
   <div class="container">
-    <div class="cta-ornament"></div>
-    <div class="cta-inner">
-      <h2>{heading}</h2>
-      <p>{body}</p>
-      <a href="mailto:hello@agentura.dev" class="btn btn-primary btn-large">hello@agentura.dev</a>
+    <div class="cta-shell">
+      <div class="cta-main">
+        <div class="cta-ornament"></div>
+        <p class="cta-kicker">{kicker}</p>
+        <div class="cta-copy">
+          <h2>{heading}</h2>
+          <p>{body}</p>
+        </div>
+        <div class="cta-actions">
+          <a href={primary.href} class="btn btn-primary btn-large">{primary.label}</a>
+          {secondary && (
+            <a href={secondary.href} class="btn btn-secondary btn-large">{secondary.label}</a>
+          )}
+        </div>
+        <div class="cta-notes">
+          <span>{primary.note}</span>
+          {secondary?.note && <span>{secondary.note}</span>}
+        </div>
+      </div>
+
+      {details.length > 0 && (
+        <div class="cta-details">
+          {details.map((detail) => (
+            <div class="cta-detail">
+              <span class="cta-detail-label">{detail.label}</span>
+              <p>{detail.value}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   </div>
 </section>
 
 <style>
   .section-cta {
-    background: var(--color-accent);
+    background: linear-gradient(135deg, var(--color-text) 0%, #26211d 100%);
     color: white;
     padding: var(--space-xl) 0;
     position: relative;
@@ -34,14 +76,30 @@ const {
     inset: 0;
     background:
       radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 20% 80%, rgba(0,0,0,0.1) 0%, transparent 60%);
+      radial-gradient(ellipse at 20% 80%, rgba(196,149,106,0.08) 0%, transparent 65%);
     pointer-events: none;
+  }
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .cta-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(260px, 0.9fr);
+    gap: 2rem;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-main {
+    max-width: 680px;
   }
   .cta-ornament {
     width: 40px;
     height: 1px;
     background: rgba(255,255,255,0.4);
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
     position: relative;
   }
   .cta-ornament::before {
@@ -54,50 +112,87 @@ const {
     top: -3px;
     left: -10px;
   }
-  .container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 2rem;
+  .cta-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.68);
+    margin-bottom: 1rem;
   }
-  .cta-inner {
-    max-width: 600px;
-  }
-  .cta-inner h2 {
+  .cta-copy h2 {
     font-family: var(--font-serif);
     font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 400;
     margin-bottom: 1.25rem;
-    line-height: 1.2;
+    line-height: 1.15;
   }
-  .cta-inner p {
+  .cta-copy p {
     font-size: 1.05rem;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 2rem;
   }
-  .btn {
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  .cta-notes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.58);
+  }
+  .cta-details {
+    display: grid;
+    gap: 1rem;
+  }
+  .cta-detail {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 1rem 1rem 1.1rem;
+    backdrop-filter: blur(8px);
+  }
+  .cta-detail-label {
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    padding: 0.85rem 2rem;
-    border-radius: 4px;
-    border-bottom: none;
-    transition: all 0.2s;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.58);
+    margin-bottom: 0.65rem;
   }
-  .btn:hover {
-    border-bottom: none;
+  .cta-detail p {
+    font-size: 0.96rem;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.88);
   }
-  .btn-primary {
-    background: white;
-    color: var(--color-accent);
+
+  @media (max-width: 900px) {
+    .cta-shell {
+      grid-template-columns: 1fr;
+    }
   }
-  .btn-primary:hover {
-    background: var(--color-bg);
-  }
-  .btn-large {
-    font-size: 1rem;
-    padding: 1rem 2.5rem;
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 1.5rem;
+    }
+    .cta-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .cta-actions .btn {
+      width: 100%;
+      text-align: center;
+    }
   }
 </style>
