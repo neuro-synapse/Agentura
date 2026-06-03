@@ -1,0 +1,128 @@
+---
+import ComplianceShell from "../components/ComplianceShell.astro";
+
+const consentLabel =
+  "I agree to receive SMS messages from Agentura at the mobile number I provide for prototype account notices, scheduled maintenance reminders, and security/login alerts.";
+---
+
+<ComplianceShell
+  title="Agentura Test SMS Alerts"
+  description="Opt in to low-volume prototype test-environment SMS alerts from Agentura."
+  kicker="SMS opt-in"
+>
+  <p slot="intro" class="compliance-lead">
+    This optional page is used to opt in to low-volume SMS messages for a prototype
+    test environment.
+  </p>
+
+  <article class="compliance-card surface-card">
+    <p>
+      Submitting this SMS opt-in form is optional. It is not required to create or use
+      an Agentura account, complete a purchase, access services, log in, or participate
+      in the prototype test environment.
+    </p>
+    <p>
+      If you choose to opt in, enter your mobile number and check the box below to
+      agree to receive recurring SMS messages from Agentura related to prototype account
+      notices, scheduled maintenance reminders, and security/login alerts. You can submit
+      this form without checking the SMS consent box; no SMS opt-in will be recorded if
+      the box is left unchecked.
+    </p>
+    <p id="sms-disclosure">
+      Message frequency varies, up to 10 messages/month. Message and data rates may
+      apply. Reply STOP to opt out. Reply HELP for help. Consent is not a condition
+      of purchase, account creation, login, service access, or prototype participation.
+    </p>
+    <p>
+      You may also opt in by texting SUBSCRIBE to Agentura at (240) 221-6244. The
+      opt-in reply identifies Agentura Test SMS Alerts and includes message frequency,
+      message/data rates, STOP, and HELP instructions.
+    </p>
+
+    <div class="compliance-links" aria-label="SMS policy links">
+      <span>Privacy Policy: <a href="/privacy">https://agentura.pages.dev/privacy</a></span>
+      <span>Terms of Service: <a href="/terms">https://agentura.pages.dev/terms</a></span>
+    </div>
+
+    <form class="sms-form" id="sms-opt-in-form">
+      <div class="form-field">
+        <label for="mobile-phone">Mobile phone number</label>
+        <input
+          id="mobile-phone"
+          name="mobilePhone"
+          type="tel"
+          inputmode="tel"
+          autocomplete="tel"
+          aria-describedby="sms-disclosure mobile-phone-note"
+        />
+        <p class="field-note" id="mobile-phone-note">
+          Use the mobile number where you want to receive Agentura Test SMS Alerts.
+          A mobile number is only required when you choose to opt in to SMS messages.
+        </p>
+      </div>
+
+      <label class="checkbox-field">
+        <input id="sms-consent" name="smsConsent" type="checkbox" value="yes" />
+        <span>{consentLabel}</span>
+      </label>
+
+      <button class="btn btn-primary btn-large" type="submit">Submit SMS preference</button>
+    </form>
+
+    <p class="sms-success" id="sms-error-message" role="alert" hidden>
+      Enter a mobile phone number to opt in to Agentura Test SMS Alerts, or leave the
+      SMS consent box unchecked to submit without SMS opt-in.
+    </p>
+
+    <p class="sms-success" id="sms-decline-message" role="status" hidden>
+      Your preference has been received. No SMS opt-in was recorded, and you will not
+      receive Agentura Test SMS Alerts.
+    </p>
+
+    <p class="sms-success" id="sms-success-message" role="status" hidden>
+      Thank you. Your SMS opt-in request has been received for Agentura Test SMS Alerts.
+      Reply STOP to opt out or HELP for help.
+    </p>
+  </article>
+
+  <script>
+    const form = document.getElementById("sms-opt-in-form");
+    const consentCheckbox = document.getElementById("sms-consent");
+    const phoneInput = document.getElementById("mobile-phone");
+    const errorMessage = document.getElementById("sms-error-message");
+    const declineMessage = document.getElementById("sms-decline-message");
+    const successMessage = document.getElementById("sms-success-message");
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (!(form instanceof HTMLFormElement)) {
+        return;
+      }
+
+      if (!(consentCheckbox instanceof HTMLInputElement) || !consentCheckbox.checked) {
+        errorMessage?.setAttribute("hidden", "");
+        successMessage?.setAttribute("hidden", "");
+        declineMessage?.removeAttribute("hidden");
+        form.reset();
+        declineMessage?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        return;
+      }
+
+      if (!(phoneInput instanceof HTMLInputElement) || phoneInput.value.trim() === "") {
+        declineMessage?.setAttribute("hidden", "");
+        successMessage?.setAttribute("hidden", "");
+        errorMessage?.removeAttribute("hidden");
+        phoneInput?.focus();
+        return;
+      }
+
+      // TODO: Store SMS consent records on the backend with phone number, timestamp, IP address if available, source URL, and exact consent language.
+      errorMessage?.setAttribute("hidden", "");
+      declineMessage?.setAttribute("hidden", "");
+      successMessage?.removeAttribute("hidden");
+      form.reset();
+      successMessage?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    });
+  </script>
+</ComplianceShell>
