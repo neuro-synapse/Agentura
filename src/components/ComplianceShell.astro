@@ -1,0 +1,220 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "./Nav.astro";
+import Footer from "./Footer.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  kicker?: string;
+}
+
+const { title, description, kicker = "Public compliance" } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <main class="compliance-page">
+    <section class="compliance-hero">
+      <div class="compliance-container">
+        <div class="compliance-kicker">{kicker}</div>
+        <h1>{title}</h1>
+        <slot name="intro" />
+      </div>
+    </section>
+
+    <section class="compliance-content">
+      <div class="compliance-container">
+        <slot />
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style is:global>
+  .compliance-page {
+    min-height: 100vh;
+  }
+
+  .compliance-container {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .compliance-hero {
+    padding: 8.5rem 0 2.5rem;
+  }
+
+  .compliance-kicker,
+  .compliance-section-label {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.85rem;
+  }
+
+  .compliance-hero h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 5vw, 4.8rem);
+    font-weight: 300;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.25rem;
+  }
+
+  .compliance-lead {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+  }
+
+  .compliance-content {
+    padding: 0 0 5rem;
+  }
+
+  .compliance-card {
+    padding: 1.5rem;
+    border-color: rgba(139, 69, 19, 0.16);
+  }
+
+  .compliance-card + .compliance-card,
+  .compliance-section + .compliance-section {
+    margin-top: 1rem;
+  }
+
+  .compliance-section {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .compliance-section h2,
+  .compliance-card h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.55rem, 3vw, 2.15rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .compliance-section p,
+  .compliance-section li,
+  .compliance-card p,
+  .compliance-card li {
+    color: var(--color-text-secondary);
+  }
+
+  .compliance-section p + p,
+  .compliance-card p + p {
+    margin-top: 0.85rem;
+  }
+
+  .compliance-list {
+    margin: 0.85rem 0 0;
+    padding-left: 1.2rem;
+  }
+
+  .compliance-list li + li {
+    margin-top: 0.45rem;
+  }
+
+  .compliance-links {
+    display: grid;
+    gap: 0.45rem;
+    margin-top: 1.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .sms-form {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.35rem;
+  }
+
+  .form-field {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .form-field label,
+  .checkbox-field {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text);
+  }
+
+  .form-field input {
+    width: 100%;
+    min-height: 3.1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    padding: 0.8rem 0.9rem;
+  }
+
+  .form-field input:focus {
+    border-color: var(--color-accent);
+    outline: 2px solid rgba(139, 69, 19, 0.16);
+    outline-offset: 0;
+  }
+
+  .field-note {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+  }
+
+  .checkbox-field {
+    display: grid;
+    grid-template-columns: 1.05rem minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: start;
+    line-height: 1.55;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .checkbox-field input {
+    width: 1.05rem;
+    height: 1.05rem;
+    margin-top: 0.18rem;
+    accent-color: var(--color-accent);
+  }
+
+  .sms-success {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid rgba(139, 69, 19, 0.2);
+    border-radius: 8px;
+    background: var(--color-accent-faint);
+    color: var(--color-text);
+  }
+
+  .sms-success[hidden] {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .compliance-container {
+      padding: 0 1.5rem;
+    }
+
+    .compliance-hero {
+      padding-top: 7.5rem;
+    }
+  }
+</style>
